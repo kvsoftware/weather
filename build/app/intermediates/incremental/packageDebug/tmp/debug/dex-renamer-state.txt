@@ -1,0 +1,4 @@
+#Sat Apr 15 16:31:32 BST 2023
+base.0=/Users/kvsoftware/Works/Flutter/weather/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
