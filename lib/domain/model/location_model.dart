@@ -9,8 +9,16 @@ class LocationModel {
   double? lon;
   String? country;
   String? state;
+  double? temp;
 
-  LocationModel({this.name, this.lat, this.lon, this.country, this.state});
+  LocationModel({
+    this.name,
+    this.lat,
+    this.lon,
+    this.country,
+    this.state,
+    this.temp,
+  });
 
   factory LocationModel.fromJson(Map<String, dynamic> json) =>
       _$LocationModelFromJson(json);

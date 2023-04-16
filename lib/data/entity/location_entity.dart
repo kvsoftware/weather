@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/model/location_model.dart';
 
 part 'location_entity.g.dart';
 

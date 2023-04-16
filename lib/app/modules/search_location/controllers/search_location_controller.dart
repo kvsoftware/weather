@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../../../domain/model/location_model.dart';
 
+import '../../../../domain/model/location_model.dart';
 import '../../../../domain/use_case/get_locations_use_case.dart';
 
 class SearchLocationController extends GetxController {
