@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/search_location/bindings/search_location_binding.dart';
+import '../modules/search_location/views/search_location_view.dart';
 
 part 'app_routes.dart';
 
@@ -15,6 +17,11 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH_LOCATION,
+      page: () => SearchLocationView(),
+      binding: SearchLocationBinding(),
     ),
   ];
 }

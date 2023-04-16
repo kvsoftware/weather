@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+import '../../../../domain/use_case/get_favorited_locations_use_case.dart';
 
-  final count = 0.obs;
+class HomeController extends GetxController {
+  final GetFavoritedLocationsUseCase _getFavoritedLocationsUseCase;
+  HomeController(this._getFavoritedLocationsUseCase);
+
+  final isLoading = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +23,5 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  getFavoritedLocations() async {}
 }

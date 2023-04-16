@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
+import '../../../../domain/use_case/get_favorited_locations_use_case.dart';
 import '../controllers/home_controller.dart';
 
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
-    );
+    Get.lazyPut(() => GetFavoritedLocationsUseCase());
+    Get.lazyPut<HomeController>(() => HomeController(Get.find()));
   }
 }
