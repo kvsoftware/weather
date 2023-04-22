@@ -31,8 +31,7 @@ class SearchLocationController extends GetxController {
 
   _getLocationsByQuery(String query) async {
     try {
-      var response = await _getWeathersUseCase.invoke(
-          '0d3300d38b4b510e4b2400e838523d69', query);
+      var response = await _getWeathersUseCase.invoke(query);
       locations(response);
     } catch (e) {
       print("test");
