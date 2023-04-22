@@ -7,13 +7,20 @@ class DataDataSource {
   DataDataSource(this._dataService);
 
   Future<WeatherEntity> getWeatherData(
-    String appid,
-    double lat,
-    double lon, {
+    String appid, {
+    int? id,
+    double? lat,
+    double? lon,
     String? units,
     String? lang,
   }) {
-    return _dataService.getWeatherData(appid, lat, lon,
-        units: units, lang: lang);
+    return _dataService.getWeatherData(
+      appid,
+      id: id,
+      lat: lat,
+      lon: lon,
+      units: units,
+      lang: lang,
+    );
   }
 }

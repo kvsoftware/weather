@@ -1,9 +1,9 @@
-import '../model/location_model.dart';
+import '../model/weather_model.dart';
 
 class GetFavoritedLocationsUseCase {
   GetFavoritedLocationsUseCase();
 
-  Future<List<LocationModel>> invoke() async {
+  Future<List<WeatherModel>> invoke() async {
     return [];
   }
 }

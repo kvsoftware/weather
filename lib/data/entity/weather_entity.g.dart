@@ -17,6 +17,7 @@ WeatherEntity _$WeatherEntityFromJson(Map<String, dynamic> json) =>
       main: json['main'] == null
           ? null
           : MainEntity.fromJson(json['main'] as Map<String, dynamic>),
+      dt: json['dt'] as int?,
     );
 
 Map<String, dynamic> _$WeatherEntityToJson(WeatherEntity instance) =>
@@ -25,4 +26,5 @@ Map<String, dynamic> _$WeatherEntityToJson(WeatherEntity instance) =>
       'name': instance.name,
       'weather': instance.weather,
       'main': instance.main,
+      'dt': instance.dt,
     };

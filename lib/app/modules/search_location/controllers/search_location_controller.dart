@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
 
-import '../../../../domain/model/location_model.dart';
-import '../../../../domain/use_case/get_locations_use_case.dart';
+import '../../../../domain/model/weather_model.dart';
+import '../../../../domain/use_case/get_weathers_use_case.dart';
 
 class SearchLocationController extends GetxController {
-  final GetLocationsUseCase _getLocationsUseCase;
-  SearchLocationController(this._getLocationsUseCase);
+  final GetWeathersUseCase _getWeathersUseCase;
+  SearchLocationController(this._getWeathersUseCase);
 
   final isLoading = false.obs;
-  final locations = <LocationModel>[].obs;
+  final locations = <WeatherModel>[].obs;
 
   @override
   void onInit() {
@@ -31,7 +31,7 @@ class SearchLocationController extends GetxController {
 
   _getLocationsByQuery(String query) async {
     try {
-      var response = await _getLocationsUseCase.invoke(
+      var response = await _getWeathersUseCase.invoke(
           '0d3300d38b4b510e4b2400e838523d69', query);
       locations(response);
     } catch (e) {

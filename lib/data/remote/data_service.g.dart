@@ -20,15 +20,17 @@ class _DataService implements DataService {
 
   @override
   Future<WeatherEntity> getWeatherData(
-    appId,
+    appId, {
+    id,
     lat,
-    lon, {
+    lon,
     units,
     lang,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'appid': appId,
+      r'id': id,
       r'lat': lat,
       r'lon': lon,
       r'units': units,

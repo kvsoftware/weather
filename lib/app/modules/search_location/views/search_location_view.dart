@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../location_detail/views/location_detail_view.dart';
-import '../../../routes/app_pages.dart';
 
-import '../../../../domain/model/location_model.dart';
+import '../../../../domain/model/weather_model.dart';
+import '../../../routes/app_pages.dart';
+import '../../location_detail/views/location_detail_view.dart';
 import '../controllers/search_location_controller.dart';
 
 class SearchLocationView extends GetView<SearchLocationController> {
@@ -56,21 +56,53 @@ class SearchLocationView extends GetView<SearchLocationController> {
     );
   }
 
-  _buildItem(LocationModel locationModel) {
-    return InkWell(
-      onTap: () => Get.toNamed(
-        Routes.LOCATION_DETAIL,
-        arguments: LocationDetailArgument(locationModel),
-      ),
-      child: Card(
-        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+  _buildItem(WeatherModel weatherModel) {
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: InkWell(
+        onTap: () => Get.toNamed(
+          Routes.LOCATION_DETAIL,
+          arguments: LocationDetailArgument(weatherModel),
+        ),
         child: Container(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(locationModel.name ?? ''),
-                Text(locationModel.country ?? ''),
-                Text(locationModel.temp.toString()),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        weatherModel.name ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 22),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        weatherModel.cityName ?? '',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        weatherModel.country ?? '',
+                        style: const TextStyle(fontSize: 14),
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    if (weatherModel.weatherIconPath != null) ...[
+                      Image.network(weatherModel.weatherIconPath!, width: 50),
+                      const SizedBox(width: 8),
+                    ],
+                    Text(
+                      '${weatherModel.temp.toString()}°',
+                      style: const TextStyle(fontSize: 40),
+                    ),
+                  ],
+                )
               ],
             )),
       ),

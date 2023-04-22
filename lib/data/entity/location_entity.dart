@@ -10,7 +10,13 @@ class LocationEntity {
   String? country;
   String? state;
 
-  LocationEntity({this.name, this.lat, this.lon, this.country, this.state});
+  LocationEntity({
+    this.name,
+    this.lat,
+    this.lon,
+    this.country,
+    this.state,
+  });
 
   factory LocationEntity.fromJson(Map<String, dynamic> json) =>
       _$LocationEntityFromJson(json);

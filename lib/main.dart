@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'di/app_binding.dart';
 
 import 'app/routes/app_pages.dart';
+import 'di/app_binding.dart';
 
 void main() {
   runApp(

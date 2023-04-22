@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import '../../../../domain/model/location_model.dart';
 
+import '../../../../domain/model/weather_model.dart';
 import '../controllers/location_detail_controller.dart';
 
 class LocationDetailArgument {
-  final LocationModel locationModel;
-  LocationDetailArgument(this.locationModel);
+  final WeatherModel weatherModel;
+  LocationDetailArgument(this.weatherModel);
 }
 
 class LocationDetailView extends GetView<LocationDetailController> {

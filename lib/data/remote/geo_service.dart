@@ -12,5 +12,5 @@ abstract class GeoService {
   @GET("geo/1.0/direct")
   Future<List<LocationEntity>> getLocations(
       @Query("appid") String appid, @Query('q') String q,
-      {@Query("limit") String? limit});
+      {@Query("limit") int? limit});
 }

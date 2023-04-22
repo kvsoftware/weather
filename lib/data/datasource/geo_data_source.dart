@@ -7,7 +7,7 @@ class GeoDataSource {
   GeoDataSource(this._geoService);
 
   Future<List<LocationEntity>> getLocations(String appId, String q,
-      {String? limit}) {
+      {int? limit}) {
     return _geoService.getLocations(appId, q, limit: limit);
   }
 }

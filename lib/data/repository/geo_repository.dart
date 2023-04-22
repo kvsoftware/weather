@@ -6,7 +6,7 @@ class GeoRepository {
   GeoRepository(this._geoDataSource);
 
   Future<List<LocationEntity>> getLocations(String appId, String q,
-      {String? limit}) {
+      {int? limit}) {
     try {
       return _geoDataSource.getLocations(appId, q, limit: limit);
     } catch (e) {

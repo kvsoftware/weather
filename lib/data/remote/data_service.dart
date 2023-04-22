@@ -11,9 +11,10 @@ abstract class DataService {
 
   @GET("data/2.5/weather")
   Future<WeatherEntity> getWeatherData(
-    @Query("appid") String appId,
-    @Query("lat") double lat,
-    @Query('lon') double lon, {
+    @Query("appid") String appId, {
+    @Query("id") int? id,
+    @Query("lat") double? lat,
+    @Query('lon') double? lon,
     @Query("units") String? units,
     @Query("lang") String? lang,
   });
