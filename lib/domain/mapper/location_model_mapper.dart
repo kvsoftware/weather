@@ -20,9 +20,14 @@ extension LocationModelParsing on LocationEntity {
         lon: lon,
         country: country,
         state: state,
-        temp: temp,
+        temp: _getTemp(temp),
         dateTime: _getDateTimeStr(dt),
         weatherIconPath: _getWeatherIconPath(weathers));
+  }
+
+  _getTemp(double? temp) {
+    if (temp == null) return null;
+    return temp.round();
   }
 
   _getDateTimeStr(int? dt) {

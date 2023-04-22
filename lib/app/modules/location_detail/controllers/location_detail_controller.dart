@@ -1,9 +1,16 @@
 import 'package:get/get.dart';
+import 'package:weather/app/modules/location_detail/views/location_detail_view.dart';
+import 'package:weather/domain/model/weather_detail_model.dart';
+
+import '../../../../domain/use_case/get_weather_by_id_use_case.dart';
 
 class LocationDetailController extends GetxController {
-  //TODO: Implement LocationDetailController
+  final GetWeatherByIdUseCase _getWeatherByIdUseCase;
+  LocationDetailController(this._getWeatherByIdUseCase);
 
-  final count = 0.obs;
+  final isLoading = false.obs;
+  final weatherDetail = Rxn<WeatherDetailModel>();
+
   @override
   void onInit() {
     super.onInit();
@@ -12,6 +19,7 @@ class LocationDetailController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    _getWeatherById((Get.arguments as LocationDetailArgument).weatherId);
   }
 
   @override
@@ -19,5 +27,14 @@ class LocationDetailController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  _getWeatherById(int weatherId) async {
+    try {
+      isLoading(true);
+      var response = await _getWeatherByIdUseCase.invoke(weatherId);
+      weatherDetail(response);
+      isLoading(false);
+    } catch (e) {
+      print("error");
+    }
+  }
 }

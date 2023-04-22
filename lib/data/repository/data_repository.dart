@@ -5,8 +5,14 @@ class DataRepository {
   final DataDataSource _dataDataSource;
   DataRepository(this._dataDataSource);
 
-  Future<WeatherEntity> getWeatherData(String appid,
-      {int? id, double? lat, double? lon, String? units, String? lang}) {
+  Future<WeatherEntity> getWeatherData(
+    String appid, {
+    int? id,
+    double? lat,
+    double? lon,
+    String? units,
+    String? lang,
+  }) {
     try {
       return _dataDataSource.getWeatherData(
         appid,

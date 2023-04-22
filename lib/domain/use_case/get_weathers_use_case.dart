@@ -1,8 +1,9 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import '../../data/repository/data_repository.dart';
 import '../../data/repository/geo_repository.dart';
 import '../mapper/location_model_mapper.dart';
 import '../model/weather_model.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class GetWeathersUseCase {
   final GeoRepository _geoRepository;

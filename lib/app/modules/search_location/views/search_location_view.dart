@@ -62,7 +62,7 @@ class SearchLocationView extends GetView<SearchLocationController> {
       child: InkWell(
         onTap: () => Get.toNamed(
           Routes.LOCATION_DETAIL,
-          arguments: LocationDetailArgument(weatherModel),
+          arguments: LocationDetailArgument(weatherModel.id ?? 0),
         ),
         child: Container(
           padding: const EdgeInsets.all(16.0),
