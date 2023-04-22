@@ -65,46 +65,47 @@ class SearchLocationView extends GetView<SearchLocationController> {
           arguments: LocationDetailArgument(weatherModel),
         ),
         child: Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        weatherModel.name ?? '',
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 22),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        weatherModel.cityName ?? '',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        weatherModel.country ?? '',
-                        style: const TextStyle(fontSize: 14),
-                      )
-                    ],
-                  ),
-                ),
-                Row(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (weatherModel.weatherIconPath != null) ...[
-                      Image.network(weatherModel.weatherIconPath!, width: 50),
-                      const SizedBox(width: 8),
-                    ],
                     Text(
-                      '${weatherModel.temp.toString()}°',
-                      style: const TextStyle(fontSize: 40),
+                      weatherModel.name ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 22),
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      weatherModel.cityName ?? '',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      weatherModel.country ?? '',
+                      style: const TextStyle(fontSize: 14),
+                    )
                   ],
-                )
-              ],
-            )),
+                ),
+              ),
+              Row(
+                children: [
+                  if (weatherModel.weatherIconPath != null) ...[
+                    Image.network(weatherModel.weatherIconPath!, width: 50),
+                    const SizedBox(width: 8),
+                  ],
+                  Text(
+                    '${weatherModel.temp.toString()}°',
+                    style: const TextStyle(fontSize: 40),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

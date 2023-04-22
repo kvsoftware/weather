@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 
 import '../../../../domain/model/weather_model.dart';
@@ -9,6 +11,9 @@ class SearchLocationController extends GetxController {
 
   final isLoading = false.obs;
   final locations = <WeatherModel>[].obs;
+
+  Timer? _timer;
+  final _delayInSeconds = 2;
 
   @override
   void onInit() {
@@ -23,18 +28,24 @@ class SearchLocationController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    _timer?.cancel();
   }
 
   onTextChanged(String text) {
-    _getLocationsByQuery(text);
+    _timer?.cancel();
+    _timer = Timer(Duration(seconds: _delayInSeconds), () {
+      _getLocationsByQuery(text);
+    });
   }
 
   _getLocationsByQuery(String query) async {
     try {
+      isLoading(true);
       var response = await _getWeathersUseCase.invoke(query);
       locations(response);
+      isLoading(false);
     } catch (e) {
-      print("test");
+      print("error");
     }
   }
 }
