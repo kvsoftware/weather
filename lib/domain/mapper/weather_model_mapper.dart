@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/entity/weather_entity.dart';
+import '../model/forecast_weather_model.dart';
 import '../model/weather_detail_model.dart';
 
 extension WeatherModelParsing on WeatherEntity {
@@ -17,10 +19,26 @@ extension WeatherModelParsing on WeatherEntity {
     );
   }
 
+  ForecastWeatherModel toForecastWeatherModel() {
+    return ForecastWeatherModel(
+      temp: _getTemp(),
+      tempMin: _getTempMin(),
+      tempMax: _getTempMax(),
+      dateTime: _getDateTimeStr(dt),
+      weatherIconPath: _getWeatherIconPath(),
+      weatherCondition: _getWeatherCondition(),
+    );
+  }
+
   _getDateTimeStr(int? dt) {
     if (dt == null) return null;
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
-    return DateFormat('yyyy-MM-dd kk:mm').format(dateTime);
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
+    final now = DateTime.now();
+
+    if (DateUtils.isSameDay(dateTime, now)) {
+      return 'Today ${DateFormat('kk:mm').format(dateTime)}';
+    }
+    return DateFormat('EEE d MMMM, kk:mm').format(dateTime);
   }
 
   _getTemp() {
@@ -47,6 +65,6 @@ extension WeatherModelParsing on WeatherEntity {
   _getWeatherCondition() {
     if (weather == null) return null;
     if (weather!.isEmpty) return null;
-    return weather![0].description ?? '';
+    return weather![0].main ?? '';
   }
 }

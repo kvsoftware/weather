@@ -26,4 +26,26 @@ class DataRepository {
       throw Exception('Connection failed');
     }
   }
+
+  Future<List<WeatherEntity>> getForecastWeathers(
+    String appid, {
+    int? id,
+    double? lat,
+    double? lon,
+    String? units,
+    String? lang,
+  }) {
+    try {
+      return _dataDataSource.getForecastWeathers(
+        appid,
+        id: id,
+        lat: lat,
+        lon: lon,
+        units: units,
+        lang: lang,
+      );
+    } catch (e) {
+      throw Exception('Connection failed');
+    }
+  }
 }
