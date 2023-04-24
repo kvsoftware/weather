@@ -16,6 +16,7 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    _getFavoritedWeathers();
   }
 
   @override
@@ -23,5 +24,12 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  getFavoritedLocations() async {}
+  _getFavoritedWeathers() async {
+    try {
+      final response = await _getFavoritedLocationsUseCase.invoke();
+      print('response : ${response.length}');
+    } catch (e) {
+      print("error");
+    }
+  }
 }

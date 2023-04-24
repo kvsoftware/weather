@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/entity/weather_entity.dart';
+import '../../data/datasource/remote/model/weather_model.dart';
 import '../model/forecast_weather_model.dart';
-import '../model/weather_detail_model.dart';
+import '../model/location_weather_model.dart';
 
-extension WeatherModelParsing on WeatherEntity {
-  WeatherDetailModel toWeatherDetailModel() {
-    return WeatherDetailModel(
+extension WeatherModelParsing on WeatherModel {
+  LocationWeatherModel toLocationWeatherDetailModel() {
+    return LocationWeatherModel(
       id: id,
       name: name,
-      dateTime: _getDateTimeStr(dt),
+      dateTime: _getDateTimeStr1(dt),
       temp: _getTemp(),
       tempMin: _getTempMin(),
       tempMax: _getTempMax(),
@@ -24,13 +24,19 @@ extension WeatherModelParsing on WeatherEntity {
       temp: _getTemp(),
       tempMin: _getTempMin(),
       tempMax: _getTempMax(),
-      dateTime: _getDateTimeStr(dt),
+      dateTime: _getDateTimeStr2(dt),
       weatherIconPath: _getWeatherIconPath(),
       weatherCondition: _getWeatherCondition(),
     );
   }
 
-  _getDateTimeStr(int? dt) {
+  _getDateTimeStr1(int? dt) {
+    if (dt == null) return null;
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
+    return DateFormat('EEE d MMMM, kk:mm').format(dateTime);
+  }
+
+  _getDateTimeStr2(int? dt) {
     if (dt == null) return null;
     final dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
     final now = DateTime.now();

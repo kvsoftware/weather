@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-import '../../../../domain/model/weather_model.dart';
-import '../../../../domain/use_case/get_weathers_use_case.dart';
+import '../../../../domain/model/location_weather_model.dart';
+import '../../../../domain/use_case/get_weathers_by_keyword_use_case.dart';
 
 class SearchLocationController extends GetxController {
-  final GetWeathersUseCase _getWeathersUseCase;
-  SearchLocationController(this._getWeathersUseCase);
+  final GetWeathersByKeywordUseCase _getWeathersByKeywordUseCase;
+  SearchLocationController(this._getWeathersByKeywordUseCase);
 
   final isLoading = false.obs;
-  final locations = <WeatherModel>[].obs;
+  final locations = <LocationWeatherModel>[].obs;
 
   Timer? _timer;
   final _delayInSeconds = 2;
@@ -41,7 +41,7 @@ class SearchLocationController extends GetxController {
   _getLocationsByQuery(String query) async {
     try {
       isLoading(true);
-      var response = await _getWeathersUseCase.invoke(query);
+      var response = await _getWeathersByKeywordUseCase.invoke(query);
       locations(response);
       isLoading(false);
     } catch (e) {

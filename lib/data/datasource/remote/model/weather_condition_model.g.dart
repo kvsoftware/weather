@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'weather_condition_entity.dart';
+part of 'weather_condition_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WeatherConditionEntity _$WeatherConditionEntityFromJson(
+WeatherConditionModel _$WeatherConditionModelFromJson(
         Map<String, dynamic> json) =>
-    WeatherConditionEntity(
+    WeatherConditionModel(
       id: json['id'] as int?,
       main: json['main'] as String?,
       description: json['description'] as String?,
       icon: json['icon'] as String?,
     );
 
-Map<String, dynamic> _$WeatherConditionEntityToJson(
-        WeatherConditionEntity instance) =>
+Map<String, dynamic> _$WeatherConditionModelToJson(
+        WeatherConditionModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'main': instance.main,

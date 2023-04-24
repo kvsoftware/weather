@@ -1,20 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'weather_detail_model.dart';
+part of 'forecast_weather_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WeatherDetailModel _$WeatherDetailModelFromJson(Map<String, dynamic> json) =>
-    WeatherDetailModel(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      cityName: json['cityName'] as String?,
-      lat: (json['lat'] as num?)?.toDouble(),
-      lon: (json['lon'] as num?)?.toDouble(),
-      country: json['country'] as String?,
-      state: json['state'] as String?,
+ForecastWeatherModel _$ForecastWeatherModelFromJson(
+        Map<String, dynamic> json) =>
+    ForecastWeatherModel(
       temp: json['temp'] as int?,
       tempMin: json['tempMin'] as int?,
       tempMax: json['tempMax'] as int?,
@@ -23,15 +17,9 @@ WeatherDetailModel _$WeatherDetailModelFromJson(Map<String, dynamic> json) =>
       weatherCondition: json['weatherCondition'] as String?,
     );
 
-Map<String, dynamic> _$WeatherDetailModelToJson(WeatherDetailModel instance) =>
+Map<String, dynamic> _$ForecastWeatherModelToJson(
+        ForecastWeatherModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'cityName': instance.cityName,
-      'lat': instance.lat,
-      'lon': instance.lon,
-      'country': instance.country,
-      'state': instance.state,
       'temp': instance.temp,
       'tempMin': instance.tempMin,
       'tempMax': instance.tempMax,

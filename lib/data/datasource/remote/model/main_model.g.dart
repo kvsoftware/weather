@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_entity.dart';
+part of 'main_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MainEntity _$MainEntityFromJson(Map<String, dynamic> json) => MainEntity(
+MainModel _$MainModelFromJson(Map<String, dynamic> json) => MainModel(
       temp: (json['temp'] as num?)?.toDouble(),
       feelsLike: (json['feels_like'] as num?)?.toDouble(),
       tempMin: (json['temp_min'] as num?)?.toDouble(),
@@ -15,8 +15,7 @@ MainEntity _$MainEntityFromJson(Map<String, dynamic> json) => MainEntity(
       humidity: json['humidity'] as int?,
     );
 
-Map<String, dynamic> _$MainEntityToJson(MainEntity instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MainModelToJson(MainModel instance) => <String, dynamic>{
       'temp': instance.temp,
       'feels_like': instance.feelsLike,
       'temp_min': instance.tempMin,

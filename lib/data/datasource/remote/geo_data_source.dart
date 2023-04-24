@@ -1,12 +1,12 @@
-import '../entity/location_entity.dart';
-import '../remote/geo_service.dart';
+import 'model/location_model.dart';
+import 'rest/geo_service.dart';
 
 class GeoDataSource {
   final GeoService _geoService;
 
   GeoDataSource(this._geoService);
 
-  Future<List<LocationEntity>> getLocations(String appId, String q,
+  Future<List<LocationModel>> getLocations(String appId, String q,
       {int? limit}) {
     return _geoService.getLocations(appId, q, limit: limit);
   }

@@ -7,11 +7,11 @@ import 'di/app_binding.dart';
 
 void main() async {
   await dotenv.load(fileName: 'config.env');
+  await AppBinding().dependencies();
   runApp(
     GetMaterialApp(
       title: "Application",
       initialRoute: AppPages.INITIAL,
-      initialBinding: AppBinding(),
       getPages: AppPages.routes,
     ),
   );

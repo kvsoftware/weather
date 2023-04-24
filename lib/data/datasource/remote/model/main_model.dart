@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'main_entity.g.dart';
+part 'main_model.g.dart';
 
 @JsonSerializable()
-class MainEntity {
+class MainModel {
   double? temp;
   @JsonKey(name: 'feels_like')
   double? feelsLike;
@@ -14,7 +14,7 @@ class MainEntity {
   int? pressure;
   int? humidity;
 
-  MainEntity(
+  MainModel(
       {this.temp,
       this.feelsLike,
       this.tempMin,
@@ -22,8 +22,8 @@ class MainEntity {
       this.pressure,
       this.humidity});
 
-  factory MainEntity.fromJson(Map<String, dynamic> json) =>
-      _$MainEntityFromJson(json);
+  factory MainModel.fromJson(Map<String, dynamic> json) =>
+      _$MainModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MainEntityToJson(this);
+  Map<String, dynamic> toJson() => _$MainModelToJson(this);
 }

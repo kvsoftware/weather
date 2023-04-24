@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../entity/response/forecast_response.dart';
-import '../entity/weather_entity.dart';
+import '../model/response/forecast_response.dart';
+import '../model/weather_model.dart';
 
 part 'data_service.g.dart';
 
@@ -11,7 +11,7 @@ abstract class DataService {
   factory DataService(Dio dio) = _DataService;
 
   @GET("data/2.5/weather")
-  Future<WeatherEntity> getWeatherData(
+  Future<WeatherModel> getWeatherData(
     @Query("appid") String appId, {
     @Query("id") int? id,
     @Query("lat") double? lat,

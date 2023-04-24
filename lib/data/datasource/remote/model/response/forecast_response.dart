@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../weather_entity.dart';
+import '../weather_model.dart';
 
 part 'forecast_response.g.dart';
 
 @JsonSerializable()
 class ForecastResponse {
-  List<WeatherEntity>? list;
+  List<WeatherModel>? list;
 
   ForecastResponse({this.list});
 

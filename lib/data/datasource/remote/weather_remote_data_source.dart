@@ -1,12 +1,12 @@
-import '../entity/weather_entity.dart';
-import '../remote/data_service.dart';
+import 'model/weather_model.dart';
+import 'rest/data_service.dart';
 
-class DataDataSource {
+class WeatherRemoteDataSource {
   final DataService _dataService;
 
-  DataDataSource(this._dataService);
+  WeatherRemoteDataSource(this._dataService);
 
-  Future<WeatherEntity> getWeatherData(
+  Future<WeatherModel> getWeatherData(
     String appid, {
     int? id,
     double? lat,
@@ -24,7 +24,7 @@ class DataDataSource {
     );
   }
 
-  Future<List<WeatherEntity>> getForecastWeathers(
+  Future<List<WeatherModel>> getForecastWeathers(
     String appid, {
     int? id,
     double? lat,

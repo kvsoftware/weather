@@ -1,9 +1,12 @@
-import '../model/weather_model.dart';
+import '../../data/repository/weather_repository.dart';
+import '../model/location_weather_model.dart';
 
 class GetFavoritedLocationsUseCase {
-  GetFavoritedLocationsUseCase();
+  final WeatherRepository _weatherRepository;
 
-  Future<List<WeatherModel>> invoke() async {
+  GetFavoritedLocationsUseCase(this._weatherRepository);
+
+  Future<List<LocationWeatherModel>> invoke() async {
     return [];
   }
 }

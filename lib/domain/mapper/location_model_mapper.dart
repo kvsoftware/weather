@@ -1,28 +1,24 @@
-import 'package:intl/intl.dart';
+import '../../data/datasource/remote/model/location_model.dart';
+import '../../data/datasource/remote/model/weather_condition_model.dart';
+import '../model/location_weather_model.dart';
 
-import '../../data/entity/location_entity.dart';
-import '../../data/entity/weather_condition_entity.dart';
-import '../model/weather_model.dart';
-
-extension LocationModelParsing on LocationEntity {
-  WeatherModel toWeatherModel({
+extension LocationModelParsing on LocationModel {
+  LocationWeatherModel toLocationWeatherDetailModel({
     int? id,
     String? cityName,
     double? temp,
     int? dt,
-    List<WeatherConditionEntity>? weathers,
+    List<WeatherConditionModel>? weathers,
   }) {
-    return WeatherModel(
-        id: id,
-        name: name,
-        cityName: cityName,
-        lat: lat,
-        lon: lon,
-        country: country,
-        state: state,
-        temp: _getTemp(temp),
-        dateTime: _getDateTimeStr(dt),
-        weatherIconPath: _getWeatherIconPath(weathers));
+    return LocationWeatherModel(
+      id: id,
+      name: name,
+      cityName: cityName,
+      country: country,
+      temp: _getTemp(temp),
+      weatherIconPath: _getWeatherIconPath(weathers),
+      weatherCondition: _getWeatherCondition(weathers),
+    );
   }
 
   _getTemp(double? temp) {
@@ -30,15 +26,15 @@ extension LocationModelParsing on LocationEntity {
     return temp.round();
   }
 
-  _getDateTimeStr(int? dt) {
-    if (dt == null) return null;
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
-    return DateFormat('yyyy-MM-dd kk:mm').format(dateTime);
+  _getWeatherIconPath(List<WeatherConditionModel>? weathers) {
+    if (weathers == null) return null;
+    if (weathers.isEmpty) return null;
+    return 'https://openweathermap.org/img/wn/${weathers![0].icon}@4x.png';
   }
 
-  _getWeatherIconPath(List<WeatherConditionEntity>? weather) {
-    if (weather == null) return null;
-    if (weather.isEmpty) return null;
-    return 'https://openweathermap.org/img/wn/${weather[0].icon}@2x.png';
+  _getWeatherCondition(List<WeatherConditionModel>? weathers) {
+    if (weathers == null) return null;
+    if (weathers.isEmpty) return null;
+    return weathers[0].main ?? '';
   }
 }

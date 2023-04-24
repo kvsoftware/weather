@@ -19,7 +19,7 @@ class _DataService implements DataService {
   String? baseUrl;
 
   @override
-  Future<WeatherEntity> getWeatherData(
+  Future<WeatherModel> getWeatherData(
     appId, {
     id,
     lat,
@@ -40,7 +40,7 @@ class _DataService implements DataService {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<WeatherEntity>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<WeatherModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -52,7 +52,45 @@ class _DataService implements DataService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = WeatherEntity.fromJson(_result.data!);
+    final value = WeatherModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ForecastResponse> getForecastWeathers(
+    appId, {
+    id,
+    lat,
+    lon,
+    units,
+    lang,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'appid': appId,
+      r'id': id,
+      r'lat': lat,
+      r'lon': lon,
+      r'units': units,
+      r'lang': lang,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ForecastResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'data/2.5/forecast',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ForecastResponse.fromJson(_result.data!);
     return value;
   }
 

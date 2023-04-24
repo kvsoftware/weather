@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../domain/model/weather_model.dart';
+import '../../../../domain/model/location_weather_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../location_detail/views/location_detail_view.dart';
 import '../controllers/search_location_controller.dart';
@@ -56,13 +56,13 @@ class SearchLocationView extends GetView<SearchLocationController> {
     );
   }
 
-  _buildItem(WeatherModel weatherModel) {
+  _buildItem(LocationWeatherModel locationWeatherModel) {
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: InkWell(
         onTap: () => Get.toNamed(
           Routes.LOCATION_DETAIL,
-          arguments: LocationDetailArgument(weatherModel.id ?? 0),
+          arguments: LocationDetailArgument(locationWeatherModel.id ?? 0),
         ),
         child: Container(
           padding: const EdgeInsets.all(16.0),
@@ -74,18 +74,18 @@ class SearchLocationView extends GetView<SearchLocationController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      weatherModel.name ?? '',
+                      locationWeatherModel.name ?? '',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 22),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      weatherModel.cityName ?? '',
+                      locationWeatherModel.cityName ?? '',
                       style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      weatherModel.country ?? '',
+                      locationWeatherModel.country ?? '',
                       style: const TextStyle(fontSize: 14),
                     )
                   ],
@@ -93,12 +93,13 @@ class SearchLocationView extends GetView<SearchLocationController> {
               ),
               Row(
                 children: [
-                  if (weatherModel.weatherIconPath != null) ...[
-                    Image.network(weatherModel.weatherIconPath!, width: 50),
+                  if (locationWeatherModel.weatherIconPath != null) ...[
+                    Image.network(locationWeatherModel.weatherIconPath!,
+                        width: 50),
                     const SizedBox(width: 8),
                   ],
                   Text(
-                    '${weatherModel.temp.toString()}°',
+                    '${locationWeatherModel.temp.toString()}°',
                     style: const TextStyle(fontSize: 40),
                   ),
                 ],
