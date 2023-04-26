@@ -104,10 +104,10 @@ class _$WeatherDao extends WeatherDao {
     this.database,
     this.changeListener,
   )   : _queryAdapter = QueryAdapter(database),
-        _weatherEntityInsertionAdapter = InsertionAdapter(
+        _weatherDbModelInsertionAdapter = InsertionAdapter(
             database,
             'weather',
-            (WeatherEntity item) =>
+            (WeatherDbModel item) =>
                 <String, Object?>{'id': item.id, 'name': item.name});
 
   final sqflite.DatabaseExecutor database;
@@ -116,20 +116,20 @@ class _$WeatherDao extends WeatherDao {
 
   final QueryAdapter _queryAdapter;
 
-  final InsertionAdapter<WeatherEntity> _weatherEntityInsertionAdapter;
+  final InsertionAdapter<WeatherDbModel> _weatherDbModelInsertionAdapter;
 
   @override
-  Future<List<WeatherEntity>> getWeathers() async {
+  Future<List<WeatherDbModel>> getWeathers() async {
     return _queryAdapter.queryList('SELECT * FROM weather',
         mapper: (Map<String, Object?> row) =>
-            WeatherEntity(row['id'] as int, row['name'] as String));
+            WeatherDbModel(row['id'] as int, row['name'] as String));
   }
 
   @override
-  Future<WeatherEntity?> getWeatherById(int id) async {
+  Future<WeatherDbModel?> getWeatherById(int id) async {
     return _queryAdapter.query('SELECT * FROM weather WHERE id = ?1',
         mapper: (Map<String, Object?> row) =>
-            WeatherEntity(row['id'] as int, row['name'] as String),
+            WeatherDbModel(row['id'] as int, row['name'] as String),
         arguments: [id]);
   }
 
@@ -140,8 +140,8 @@ class _$WeatherDao extends WeatherDao {
   }
 
   @override
-  Future<void> insertWeather(WeatherEntity weather) async {
-    await _weatherEntityInsertionAdapter.insert(
-        weather, OnConflictStrategy.abort);
+  Future<void> insertWeather(WeatherDbModel weatherDbModel) async {
+    await _weatherDbModelInsertionAdapter.insert(
+        weatherDbModel, OnConflictStrategy.abort);
   }
 }

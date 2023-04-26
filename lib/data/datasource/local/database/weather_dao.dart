@@ -1,17 +1,17 @@
 import 'package:floor/floor.dart';
 
-import '../entity/weather_entity.dart';
+import '../model/weather_db_model.dart';
 
 @dao
 abstract class WeatherDao {
   @Query('SELECT * FROM weather')
-  Future<List<WeatherEntity>> getWeathers();
+  Future<List<WeatherDbModel>> getWeathers();
 
   @Query('SELECT * FROM weather WHERE id = :id')
-  Future<WeatherEntity?> getWeatherById(int id);
+  Future<WeatherDbModel?> getWeatherById(int id);
 
   @insert
-  Future<void> insertWeather(WeatherEntity weather);
+  Future<void> insertWeather(WeatherDbModel weatherDbModel);
 
   @Query('DELETE FROM weather WHERE id = :id')
   Future<void> deleteWeatherById(int id);

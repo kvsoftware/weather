@@ -19,7 +19,7 @@ class _DataService implements DataService {
   String? baseUrl;
 
   @override
-  Future<WeatherModel> getWeatherData(
+  Future<WeatherApiModel> getWeather(
     appId, {
     id,
     lat,
@@ -40,7 +40,7 @@ class _DataService implements DataService {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<WeatherModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<WeatherApiModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -52,12 +52,12 @@ class _DataService implements DataService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = WeatherModel.fromJson(_result.data!);
+    final value = WeatherApiModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<ForecastResponse> getForecastWeathers(
+  Future<WeathersResponse> getForecastWeathers(
     appId, {
     id,
     lat,
@@ -78,7 +78,7 @@ class _DataService implements DataService {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ForecastResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<WeathersResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -90,7 +90,7 @@ class _DataService implements DataService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ForecastResponse.fromJson(_result.data!);
+    final value = WeathersResponse.fromJson(_result.data!);
     return value;
   }
 
