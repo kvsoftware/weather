@@ -1,5 +1,6 @@
+import '../../data/datasource/local/model/favorite_db_model.dart';
+
 import '../../data/datasource/local/database/app_database.dart';
-import '../../data/datasource/local/model/weather_db_model.dart';
 
 class FavoriteLocationWeatherUseCase {
   final AppDatabase _appDatabase;
@@ -8,10 +9,11 @@ class FavoriteLocationWeatherUseCase {
 
   Future<void> invoke(int weatherId, bool isFavorited) async {
     if (isFavorited) {
-      return _appDatabase.weatherDao
-          .insertWeather(WeatherDbModel(weatherId, 'test'));
+      return _appDatabase.favoriteDao
+          .insertFavorite(FavoriteDbModel(id: weatherId));
     } else {
-      return _appDatabase.weatherDao.deleteWeatherById(weatherId);
+      return _appDatabase.favoriteDao
+          .deleteFavorite(FavoriteDbModel(id: weatherId));
     }
   }
 }

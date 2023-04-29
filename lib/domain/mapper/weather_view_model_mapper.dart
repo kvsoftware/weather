@@ -8,7 +8,7 @@ extension WeatherViewModelMapper on WeatherEntity {
       id: id,
       name: name,
       temp: temp?.roundToDouble(),
-      weatherIcon: _getWeatherIcon(),
+      weatherIcon: weatherIcon,
     );
   }
 
@@ -19,12 +19,8 @@ extension WeatherViewModelMapper on WeatherEntity {
         temp: temp?.roundToDouble(),
         tempMin: tempMin?.roundToDouble(),
         tempMax: tempMax?.roundToDouble(),
-        weatherIcon: _getWeatherIcon(),
+        weatherIcon: weatherIcon,
         weatherCondition: weatherCondition,
         dateTime: dt);
-  }
-
-  _getWeatherIcon() {
-    return 'https://openweathermap.org/img/wn/${weatherIcon}@4x.png';
   }
 }

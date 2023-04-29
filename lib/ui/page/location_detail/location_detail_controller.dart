@@ -55,7 +55,7 @@ class LocationDetailController extends GetxController {
     _isLoading(isLoadingWeather: true);
     try {
       var response = (await _getWeatherByIdUseCase.invoke(weatherId));
-      weatherDetail(response.toWeatherDetailViewModel());
+      weatherDetail(response?.toWeatherDetailViewModel());
     } catch (e) {
       print("error");
     }

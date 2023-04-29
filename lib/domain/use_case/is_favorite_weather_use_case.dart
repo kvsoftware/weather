@@ -6,6 +6,6 @@ class IsFavoriteWeatherUseCase {
   IsFavoriteWeatherUseCase(this._appDatabase);
 
   Future<bool> invoke(int weatherId) async {
-    return await _appDatabase.weatherDao.getWeatherById(weatherId) != null;
+    return await _appDatabase.favoriteDao.getFavoriteById(weatherId) != null;
   }
 }

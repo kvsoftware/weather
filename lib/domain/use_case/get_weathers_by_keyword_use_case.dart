@@ -21,11 +21,11 @@ class GetWeathersByKeywordUseCase {
     );
     var weatherEntities = <WeatherEntity>[];
     for (var locationEntity in locationEntities) {
-      var data = await _weatherRepository.getWeather(
+      var data = await _weatherRepository.getWeatherByCoordinate(
         apiKey,
-        lat: locationEntity.lat!,
-        lon: locationEntity.lon!,
-        units: 'metric',
+        locationEntity.lat!,
+        locationEntity.lon!,
+        'metric',
       );
       weatherEntities.add(data);
     }

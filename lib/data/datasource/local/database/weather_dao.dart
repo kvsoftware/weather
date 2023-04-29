@@ -10,9 +10,9 @@ abstract class WeatherDao {
   @Query('SELECT * FROM weather WHERE id = :id')
   Future<WeatherDbModel?> getWeatherById(int id);
 
-  @insert
+  @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertWeather(WeatherDbModel weatherDbModel);
 
-  @Query('DELETE FROM weather WHERE id = :id')
-  Future<void> deleteWeatherById(int id);
+  @delete
+  Future<void> deleteWeather(WeatherDbModel weatherDbModel);
 }

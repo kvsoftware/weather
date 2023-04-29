@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../datasource/local/model/weather_db_model.dart';
 
 import '../datasource/remote/model/weather_api_model.dart';
 import '../../domain/entity/forecast_weather_entity.dart';
 import '../../domain/entity/weather_entity.dart';
+
+extension WeatherDbModelMapping on WeatherDbModel {
+  WeatherEntity toWeatherEntity() {
+    return WeatherEntity(
+      id: id,
+      name: name,
+      lat: lat,
+      lon: lon,
+      temp: temp,
+      tempMin: tempMin,
+      tempMax: tempMax,
+      weatherIcon: weatherIcon,
+      weatherCondition: weatherCondition,
+      dt: DateTime.fromMillisecondsSinceEpoch(dt * 1000),
+    );
+  }
+}
 
 extension WeatherModelMapping on WeatherApiModel {
   WeatherEntity toWeatherEntity() {
@@ -15,9 +33,24 @@ extension WeatherModelMapping on WeatherApiModel {
       temp: main?.temp,
       tempMin: main?.tempMin,
       tempMax: main?.tempMax,
-      weatherIcon: weather?[0].icon,
-      weatherCondition: weather?[0].main,
+      weatherIcon: _getWeatherIconPath(),
+      weatherCondition: _getWeatherCondition(),
       dt: _getDateTime(),
+    );
+  }
+
+  WeatherDbModel toWeatherDbModel() {
+    return WeatherDbModel(
+      id: id ?? 0,
+      name: name ?? '',
+      lat: coord?.lat ?? 0,
+      lon: coord?.lon ?? 0,
+      temp: main?.temp ?? 0,
+      tempMin: main?.tempMin ?? 0,
+      tempMax: main?.tempMax ?? 0,
+      weatherIcon: _getWeatherIconPath(),
+      weatherCondition: _getWeatherCondition(),
+      dt: dt ?? 0,
     );
   }
 

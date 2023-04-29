@@ -1,8 +1,8 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../../data/mapper/weather_model_mapper.dart';
 import '../../data/repository/weather_repository.dart';
 import '../entity/forecast_weather_entity.dart';
-import '../../data/mapper/weather_model_mapper.dart';
 
 class GetForecastWeathersByIdUseCase {
   final WeatherRepository _weatherRepository;
