@@ -43,6 +43,7 @@ class HomeView extends GetView<HomeController> {
 
   _buildItem(WeatherViewModel weatherViewModel) {
     return Card(
+      color: weatherViewModel.color,
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: InkWell(
         onTap: () => Get.toNamed(

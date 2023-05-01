@@ -10,6 +10,7 @@ class WeatherDbModel {
   final double temp;
   final double tempMin;
   final double tempMax;
+  final int weatherCode;
   final String weatherIcon;
   final String weatherCondition;
   final int dt;
@@ -22,6 +23,7 @@ class WeatherDbModel {
     required this.temp,
     required this.tempMin,
     required this.tempMax,
+    required this.weatherCode,
     required this.weatherIcon,
     required this.weatherCondition,
     required this.dt,

@@ -46,11 +46,14 @@ class LocationDetailView extends GetView<LocationDetailController> {
   }
 
   _buildMainLayout() {
-    return Column(
-      children: [
-        _buildWeatherData(),
-        _buildForecastWeathers(),
-      ],
+    return Container(
+      color: controller.weatherDetail.value?.color,
+      child: Column(
+        children: [
+          _buildWeatherData(),
+          _buildForecastWeathers(),
+        ],
+      ),
     );
   }
 

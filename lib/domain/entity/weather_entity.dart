@@ -12,6 +12,7 @@ class WeatherEntity {
   double? temp;
   double? tempMin;
   double? tempMax;
+  int? weatherCode;
   String? weatherIcon;
   String? weatherCondition;
   DateTime? dt;
@@ -25,6 +26,7 @@ class WeatherEntity {
     this.temp,
     this.tempMin,
     this.tempMax,
+    this.weatherCode,
     this.weatherIcon,
     this.weatherCondition,
     this.dt,

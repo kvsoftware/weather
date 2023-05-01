@@ -16,6 +16,7 @@ extension WeatherDbModelMapping on WeatherDbModel {
       temp: temp,
       tempMin: tempMin,
       tempMax: tempMax,
+      weatherCode: weatherCode,
       weatherIcon: weatherIcon,
       weatherCondition: weatherCondition,
       dt: DateTime.fromMillisecondsSinceEpoch(dt * 1000),
@@ -33,6 +34,7 @@ extension WeatherModelMapping on WeatherApiModel {
       temp: main?.temp,
       tempMin: main?.tempMin,
       tempMax: main?.tempMax,
+      weatherCode: _getWeatherCode(),
       weatherIcon: _getWeatherIconPath(),
       weatherCondition: _getWeatherCondition(),
       dt: _getDateTime(),
@@ -48,6 +50,7 @@ extension WeatherModelMapping on WeatherApiModel {
       temp: main?.temp ?? 0,
       tempMin: main?.tempMin ?? 0,
       tempMax: main?.tempMax ?? 0,
+      weatherCode: _getWeatherCode(),
       weatherIcon: _getWeatherIconPath(),
       weatherCondition: _getWeatherCondition(),
       dt: dt ?? 0,
@@ -100,6 +103,12 @@ extension WeatherModelMapping on WeatherApiModel {
   _getTempMax() {
     if (main?.tempMax == null) return null;
     return main!.tempMax!.round();
+  }
+
+  _getWeatherCode() {
+    if (weather == null) return null;
+    if (weather!.isEmpty) return null;
+    return weather![0].id;
   }
 
   _getWeatherIconPath() {
