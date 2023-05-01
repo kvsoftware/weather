@@ -40,15 +40,15 @@ class SearchLocationController extends GetxController {
   }
 
   _getLocationsByQuery(String query) async {
+    isLoading(true);
     try {
-      isLoading(true);
       var weatherViewModels = (await _getWeathersByKeywordUseCase.invoke(query))
           .map((e) => e.toWeatherViewModel())
           .toList();
       locations(weatherViewModels);
-      isLoading(false);
     } catch (e) {
       print("error");
     }
+    isLoading(false);
   }
 }
