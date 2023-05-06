@@ -16,23 +16,27 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
         actions: [
           IconButton(
-              icon: const Icon(Icons.search, color: Colors.white),
-              onPressed: () => Get.toNamed(Routes.SEARCH_LOCATION))
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () => Get.toNamed(Routes.SEARCH_LOCATION),
+          )
         ],
       ),
       body: Obx(
-        () => Stack(
-          children: [
-            _buildListView(),
-            if (controller.isLoading.value)
-              const Center(child: CircularProgressIndicator()),
-          ],
+        () => RefreshIndicator(
+          onRefresh: controller.onRefresh,
+          child: Stack(
+            children: [
+              _buildListView(context),
+              if (controller.locations.isEmpty) const Center(child: Text("Empty")),
+              if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator()),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  _buildListView() {
+  _buildListView(BuildContext context) {
     return ListView.builder(
       itemCount: controller.locations.length,
       itemBuilder: (context, index) {

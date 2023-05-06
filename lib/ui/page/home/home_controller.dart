@@ -27,12 +27,15 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  _getFavoritedWeathers() async {
+  Future<void> onRefresh() async {
+    _getFavoritedWeathers();
+  }
+
+  void _getFavoritedWeathers() async {
     isLoading(true);
     try {
-      var weatherViewModels = (await _getFavoritedLocationsUseCase.invoke())
-          .map((e) => e.toWeatherViewModel())
-          .toList();
+      var weatherViewModels =
+          (await _getFavoritedLocationsUseCase.invoke()).map((e) => e.toWeatherViewModel()).toList();
       locations(weatherViewModels);
     } catch (e) {
       print("error");

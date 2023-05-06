@@ -44,14 +44,21 @@ class LocationDetailController extends GetxController {
     _getStatusFavorite(weatherId);
   }
 
-  updateFavorite() async {
+  void updateFavorite() async {
     if (weatherDetail.value?.id == null) return;
     final id = weatherDetail.value!.id!;
     _setFavorite(id, !isFavorited.value);
     isFavorited(!isFavorited.value);
   }
 
-  _getWeatherById(int weatherId) async {
+  Future<void> onRefresh() async {
+    final weatherId = (Get.arguments as LocationDetailArgument).weatherId;
+    _getWeatherById(weatherId);
+    _getForecastWeathersById(weatherId);
+    _getStatusFavorite(weatherId);
+  }
+
+  void _getWeatherById(int weatherId) async {
     _isLoading(isLoadingWeather: true);
     try {
       var response = (await _getWeatherByIdUseCase.invoke(weatherId));
@@ -62,7 +69,7 @@ class LocationDetailController extends GetxController {
     _isLoading(isLoadingWeather: false);
   }
 
-  _getForecastWeathersById(int weatherId) async {
+  void _getForecastWeathersById(int weatherId) async {
     _isLoading(isLoadingForecast: true);
     try {
       var response = await _getForecastWeathersByIdUseCase.invoke(weatherId);
@@ -73,7 +80,7 @@ class LocationDetailController extends GetxController {
     _isLoading(isLoadingForecast: false);
   }
 
-  _isLoading({bool? isLoadingWeather, bool? isLoadingForecast}) {
+  void _isLoading({bool? isLoadingWeather, bool? isLoadingForecast}) {
     if (isLoadingWeather != null) {
       this.isLoadingWeather = isLoadingWeather;
     }
@@ -83,7 +90,7 @@ class LocationDetailController extends GetxController {
     isLoading(this.isLoadingWeather || this.isLoadingForecast);
   }
 
-  _setFavorite(int weatherId, bool isFavorited) async {
+  void _setFavorite(int weatherId, bool isFavorited) async {
     try {
       await _favoriteLocationWeatherUseCase.invoke(weatherId, isFavorited);
     } catch (e) {
@@ -91,7 +98,7 @@ class LocationDetailController extends GetxController {
     }
   }
 
-  _getStatusFavorite(int weatherId) async {
+  void _getStatusFavorite(int weatherId) async {
     try {
       isFavorited(await _isFavoriteWeatherUseCase.invoke(weatherId));
     } catch (e) {

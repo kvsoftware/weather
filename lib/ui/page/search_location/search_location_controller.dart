@@ -32,19 +32,18 @@ class SearchLocationController extends GetxController {
     _timer?.cancel();
   }
 
-  onTextChanged(String text) {
+  void onTextChanged(String text) {
     _timer?.cancel();
     _timer = Timer(Duration(seconds: _delayInSeconds), () {
       _getLocationsByQuery(text);
     });
   }
 
-  _getLocationsByQuery(String query) async {
+  void _getLocationsByQuery(String query) async {
     isLoading(true);
     try {
-      var weatherViewModels = (await _getWeathersByKeywordUseCase.invoke(query))
-          .map((e) => e.toWeatherViewModel())
-          .toList();
+      var weatherViewModels =
+          (await _getWeathersByKeywordUseCase.invoke(query)).map((e) => e.toWeatherViewModel()).toList();
       locations(weatherViewModels);
     } catch (e) {
       print("error");

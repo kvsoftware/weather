@@ -23,36 +23,35 @@ class LocationDetailView extends GetView<LocationDetailController> {
           actions: [
             IconButton(
                 icon: Icon(
-                  controller.isFavorited.value
-                      ? Icons.favorite
-                      : Icons.favorite_border_outlined,
+                  controller.isFavorited.value ? Icons.favorite : Icons.favorite_border_outlined,
                   color: Colors.white,
                 ),
                 onPressed: () => controller.updateFavorite())
           ],
         ),
-        body: Stack(
-          children: [
-            if (controller.weatherDetail.value != null) _buildMainLayout(),
-            if (controller.isLoading.value) _builLoadingLayout(),
-          ],
+        body: RefreshIndicator(
+          onRefresh: controller.onRefresh,
+          child: Stack(
+            children: [
+              if (controller.weatherDetail.value != null) _buildMainLayout(),
+              if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator())
+            ],
+          ),
         ),
       ),
     );
   }
 
-  _builLoadingLayout() {
-    return const Center(child: CircularProgressIndicator());
-  }
-
   _buildMainLayout() {
-    return Container(
-      color: controller.weatherDetail.value?.color,
-      child: Column(
-        children: [
-          _buildWeatherData(),
-          _buildForecastWeathers(),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        color: controller.weatherDetail.value?.color,
+        child: Column(
+          children: [
+            _buildWeatherData(),
+            _buildForecastWeathers(),
+          ],
+        ),
       ),
     );
   }
@@ -89,16 +88,14 @@ class LocationDetailView extends GetView<LocationDetailController> {
   }
 
   _buildForecastWeathers() {
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const ClampingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        itemCount: controller.forecastWeathers.value.length,
-        itemBuilder: (context, index) => Container(
-          child: _buildForecastWeather(
-            controller.forecastWeathers.value[index],
-          ),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemCount: controller.forecastWeathers.length,
+      itemBuilder: (context, index) => Container(
+        child: _buildForecastWeather(
+          controller.forecastWeathers[index],
         ),
       ),
     );
@@ -128,8 +125,7 @@ class LocationDetailView extends GetView<LocationDetailController> {
             if (forecastWeatherEntity.weatherIconPath != null) ...[
               Row(
                 children: [
-                  Image.network(forecastWeatherEntity.weatherIconPath!,
-                      width: 60),
+                  Image.network(forecastWeatherEntity.weatherIconPath!, width: 60),
                   Text('${forecastWeatherEntity.temp.toString()}°'),
                 ],
               )

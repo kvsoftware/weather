@@ -15,6 +15,7 @@ dependencies:
   intl: ^0.18.1
   flutter_dotenv: ^5.0.2
   floor: ^1.4.1
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies: 
   retrofit_generator: '>=6.0.0 <7.0.0'
