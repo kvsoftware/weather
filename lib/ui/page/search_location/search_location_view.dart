@@ -23,19 +23,28 @@ class SearchLocationView extends GetView<SearchLocationController> {
           children: [
             Column(
               children: [
+                if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
                 _buildTitle(),
                 _buildListView(),
               ],
             ),
-            if (controller.isLoading.value)
-              const Center(child: CircularProgressIndicator()),
+            if (controller.isLoading.value) const Center(child: CircularProgressIndicator()),
           ],
         ),
       ),
     );
   }
 
-  _buildTitle() {
+  Widget _buildNoInternetConnectionLayout(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(8.0),
+      color: Colors.blueGrey,
+      child: const Text("No internet connection", textAlign: TextAlign.center),
+    );
+  }
+
+  Widget _buildTitle() {
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
@@ -45,7 +54,7 @@ class SearchLocationView extends GetView<SearchLocationController> {
     );
   }
 
-  _buildListView() {
+  Widget _buildListView() {
     return Expanded(
       child: ListView.builder(
         itemCount: controller.locations.length,
@@ -56,7 +65,7 @@ class SearchLocationView extends GetView<SearchLocationController> {
     );
   }
 
-  _buildItem(WeatherViewModel weatherViewModel) {
+  Widget _buildItem(WeatherViewModel weatherViewModel) {
     return Card(
       color: weatherViewModel.color,
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),

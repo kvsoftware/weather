@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/mapper/weather_view_model_mapper.dart';
@@ -9,11 +12,16 @@ class HomeController extends GetxController {
   HomeController(this._getFavoritedLocationsUseCase);
 
   final isLoading = false.obs;
+  final isOffline = false.obs;
   final locations = <WeatherViewModel>[].obs;
+  late StreamSubscription subscription;
 
   @override
   void onInit() {
     super.onInit();
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      isOffline(result == ConnectivityResult.none);
+    });
   }
 
   @override
@@ -24,6 +32,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    subscription.cancel();
     super.onClose();
   }
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../datasource/local/model/weather_db_model.dart';
 
-import '../datasource/remote/model/weather_api_model.dart';
 import '../../domain/entity/forecast_weather_entity.dart';
 import '../../domain/entity/weather_entity.dart';
+import '../datasource/local/model/weather_db_model.dart';
+import '../datasource/remote/model/weather_api_model.dart';
 
 extension WeatherDbModelMapping on WeatherDbModel {
   WeatherEntity toWeatherEntity() {

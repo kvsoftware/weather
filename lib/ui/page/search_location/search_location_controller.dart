@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/mapper/weather_view_model_mapper.dart';
@@ -11,14 +12,20 @@ class SearchLocationController extends GetxController {
   SearchLocationController(this._getWeathersByKeywordUseCase);
 
   final isLoading = false.obs;
+  final isOffline = false.obs;
   final locations = <WeatherViewModel>[].obs;
 
   Timer? _timer;
   final _delayInSeconds = 2;
 
+  late StreamSubscription subscription;
+
   @override
   void onInit() {
     super.onInit();
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      isOffline(result == ConnectivityResult.none);
+    });
   }
 
   @override
@@ -28,8 +35,9 @@ class SearchLocationController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
+    subscription.cancel();
     _timer?.cancel();
+    super.onClose();
   }
 
   void onTextChanged(String text) {

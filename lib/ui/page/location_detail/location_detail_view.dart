@@ -29,20 +29,36 @@ class LocationDetailView extends GetView<LocationDetailController> {
                 onPressed: () => controller.updateFavorite())
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: controller.onRefresh,
-          child: Stack(
-            children: [
-              if (controller.weatherDetail.value != null) _buildMainLayout(),
-              if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator())
-            ],
-          ),
+        body: Column(
+          children: [
+            if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: Stack(
+                  children: [
+                    if (controller.weatherDetail.value != null) _buildMainLayout(),
+                    if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator())
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  _buildMainLayout() {
+  Widget _buildNoInternetConnectionLayout(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(8.0),
+      color: Colors.blueGrey,
+      child: const Text("No internet connection", textAlign: TextAlign.center),
+    );
+  }
+
+  Widget _buildMainLayout() {
     return SingleChildScrollView(
       child: Container(
         color: controller.weatherDetail.value?.color,
@@ -56,13 +72,13 @@ class LocationDetailView extends GetView<LocationDetailController> {
     );
   }
 
-  _buildWeatherData() {
+  Widget _buildWeatherData() {
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(_getDateTime(controller.weatherDetail.value?.dateTime)),
+          Text(_getDateTime(controller.weatherDetail.value?.dateTime) ?? ''),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -87,7 +103,7 @@ class LocationDetailView extends GetView<LocationDetailController> {
     );
   }
 
-  _buildForecastWeathers() {
+  Widget _buildForecastWeathers() {
     return ListView.builder(
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
@@ -101,7 +117,7 @@ class LocationDetailView extends GetView<LocationDetailController> {
     );
   }
 
-  _buildForecastWeather(ForecastWeatherEntity forecastWeatherEntity) {
+  Widget _buildForecastWeather(ForecastWeatherEntity forecastWeatherEntity) {
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Container(
@@ -148,7 +164,7 @@ class LocationDetailView extends GetView<LocationDetailController> {
     );
   }
 
-  _getDateTime(DateTime? dateTime) {
+  String? _getDateTime(DateTime? dateTime) {
     if (dateTime == null) return null;
     final now = DateTime.now();
 

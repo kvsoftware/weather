@@ -1,6 +1,5 @@
-import '../../data/datasource/local/model/favorite_db_model.dart';
-
 import '../../data/datasource/local/database/app_database.dart';
+import '../../data/datasource/local/model/favorite_db_model.dart';
 
 class FavoriteLocationWeatherUseCase {
   final AppDatabase _appDatabase;

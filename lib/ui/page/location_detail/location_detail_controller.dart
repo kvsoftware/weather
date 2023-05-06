@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/entity/forecast_weather_entity.dart';
@@ -23,6 +26,7 @@ class LocationDetailController extends GetxController {
   );
 
   final isLoading = false.obs;
+  final isOffline = false.obs;
   final weatherDetail = Rxn<WeatherDetailViewModel>();
   final forecastWeathers = <ForecastWeatherEntity>[].obs;
   final isFavorited = false.obs;
@@ -30,9 +34,14 @@ class LocationDetailController extends GetxController {
   bool isLoadingWeather = false;
   bool isLoadingForecast = false;
 
+  late StreamSubscription subscription;
+
   @override
   void onInit() {
     super.onInit();
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      isOffline(result == ConnectivityResult.none);
+    });
   }
 
   @override
@@ -42,6 +51,12 @@ class LocationDetailController extends GetxController {
     _getWeatherById(weatherId);
     _getForecastWeathersById(weatherId);
     _getStatusFavorite(weatherId);
+  }
+
+  @override
+  void onClose() {
+    subscription.cancel();
+    super.onClose();
   }
 
   void updateFavorite() async {

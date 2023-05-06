@@ -22,21 +22,37 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       body: Obx(
-        () => RefreshIndicator(
-          onRefresh: controller.onRefresh,
-          child: Stack(
-            children: [
-              _buildListView(context),
-              if (controller.locations.isEmpty) const Center(child: Text("Empty")),
-              if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator()),
-            ],
-          ),
+        () => Column(
+          children: [
+            if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: Stack(
+                  children: [
+                    _buildListView(context),
+                    if (controller.locations.isEmpty) const Center(child: Text("Empty")),
+                    if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator()),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  _buildListView(BuildContext context) {
+  Widget _buildNoInternetConnectionLayout(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(8.0),
+      color: Colors.blueGrey,
+      child: const Text("No internet connection", textAlign: TextAlign.center),
+    );
+  }
+
+  Widget _buildListView(BuildContext context) {
     return ListView.builder(
       itemCount: controller.locations.length,
       itemBuilder: (context, index) {
@@ -45,7 +61,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  _buildItem(WeatherViewModel weatherViewModel) {
+  Widget _buildItem(WeatherViewModel weatherViewModel) {
     return Card(
       color: weatherViewModel.color,
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
