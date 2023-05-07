@@ -38,7 +38,7 @@ class MapController extends BaseController {
     try {
       final response = await _getCameraPositionUseCase.invoke();
       if (response == null) return;
-      mapController.animateCamera(
+      mapController.moveCamera(
         CameraUpdate.newLatLngZoom(
           LatLng(response.latitude, response.longitude),
           response.zoom,
