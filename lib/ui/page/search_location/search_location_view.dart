@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../base_view.dart';
 import '../../routes/app_pages.dart';
 import '../../view_model/weather_view_model.dart';
 import '../location_detail/location_detail_view.dart';
 import 'search_location_controller.dart';
 
-class SearchLocationView extends GetView<SearchLocationController> {
+class SearchLocationView extends BaseView<SearchLocationController> {
   SearchLocationView({Key? key}) : super(key: key);
 
   final _textEditingcontroller = TextEditingController();
@@ -23,7 +24,7 @@ class SearchLocationView extends GetView<SearchLocationController> {
           children: [
             Column(
               children: [
-                if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
+                if (controller.isOffline.isTrue) buildNoInternetConnectionLayout(context),
                 _buildTitle(),
                 _buildListView(),
               ],
@@ -32,15 +33,6 @@ class SearchLocationView extends GetView<SearchLocationController> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildNoInternetConnectionLayout(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(8.0),
-      color: Colors.blueGrey,
-      child: const Text("No internet connection", textAlign: TextAlign.center),
     );
   }
 

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-import '../../../../domain/mapper/weather_view_model_mapper.dart';
 import '../../../../domain/use_case/get_favorited_locations_use_case.dart';
 import '../../../base_controller.dart';
+import '../../../mapper/weather_view_model_mapper.dart';
 import '../../../view_model/weather_view_model.dart';
 
 class FavoritesController extends BaseController {

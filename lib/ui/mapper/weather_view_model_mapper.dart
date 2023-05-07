@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../ui/view_model/weather_detail_view_model.dart';
-import '../../ui/view_model/weather_view_model.dart';
-import '../entity/weather_entity.dart';
+import '../../domain/entity/weather_entity.dart';
+import '../page/location_detail/location_detail_view.dart';
+import '../routes/app_pages.dart';
+import '../view_model/weather_detail_view_model.dart';
+import '../view_model/weather_view_model.dart';
 
-extension WeatherViewModelMapper on WeatherEntity {
+extension WeatherEntitylMapper on WeatherEntity {
   WeatherViewModel toWeatherViewModel() {
     return WeatherViewModel(
       id: id,
       name: name,
-      temp: temp?.roundToDouble(),
+      temp: temp?.round(),
       weatherIcon: weatherIcon,
       color: _getColor(),
     );
@@ -19,13 +23,29 @@ extension WeatherViewModelMapper on WeatherEntity {
     return WeatherDetailViewModel(
         id: id,
         name: name,
-        temp: temp?.roundToDouble(),
-        tempMin: tempMin?.roundToDouble(),
-        tempMax: tempMax?.roundToDouble(),
+        temp: temp?.round(),
+        tempMin: tempMin?.round(),
+        tempMax: tempMax?.round(),
         weatherIcon: weatherIcon,
         weatherCondition: weatherCondition,
         color: _getColor(),
         dateTime: dt);
+  }
+
+  Marker toMarker() {
+    return Marker(
+      markerId: MarkerId(id.toString()),
+      position: LatLng(lat ?? 0, lon ?? 0),
+      infoWindow: InfoWindow(
+        title: name,
+        snippet: "${temp?.round()}°",
+        onTap: () => Get.toNamed(
+          Routes.LOCATION_DETAIL,
+          arguments: LocationDetailArgument(id ?? 0),
+        ),
+      ),
+      flat: true,
+    );
   }
 
   Color _getColor() {

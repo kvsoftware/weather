@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../domain/entity/forecast_weather_entity.dart';
+import '../../base_view.dart';
 import 'location_detail_controller.dart';
 
 class LocationDetailArgument {
@@ -10,7 +11,7 @@ class LocationDetailArgument {
   LocationDetailArgument(this.weatherId);
 }
 
-class LocationDetailView extends GetView<LocationDetailController> {
+class LocationDetailView extends BaseView<LocationDetailController> {
   const LocationDetailView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class LocationDetailView extends GetView<LocationDetailController> {
         ),
         body: Column(
           children: [
-            if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
+            if (controller.isOffline.isTrue) buildNoInternetConnectionLayout(context),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: controller.onRefresh,
@@ -46,15 +47,6 @@ class LocationDetailView extends GetView<LocationDetailController> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildNoInternetConnectionLayout(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(8.0),
-      color: Colors.blueGrey,
-      child: const Text("No internet connection", textAlign: TextAlign.center),
     );
   }
 

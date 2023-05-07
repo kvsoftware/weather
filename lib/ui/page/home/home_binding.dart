@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:weather/domain/use_case/set_camera_position_use_case.dart';
+import '../../../domain/use_case/set_camera_position_use_case.dart';
 import '../../../domain/use_case/get_camera_position_use_case.dart';
 import 'map/map_controller.dart';
 
@@ -16,7 +16,7 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => SetCameraPositionUseCase(Get.find()));
     Get.lazyPut(() => GetWeatherMapTileUseCase(Get.find()));
     Get.lazyPut<FavoritesController>(() => FavoritesController(Get.find()));
-    Get.lazyPut<MapController>(() => MapController(Get.find(), Get.find(), Get.find()));
+    Get.lazyPut<MapController>(() => MapController(Get.find(), Get.find(), Get.find(), Get.find()));
     Get.lazyPut<HomeController>(() => HomeController());
   }
 }

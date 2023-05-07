@@ -3,9 +3,9 @@ import 'dart:ui';
 class WeatherDetailViewModel {
   int? id;
   String? name;
-  double? temp;
-  double? tempMin;
-  double? tempMax;
+  int? temp;
+  int? tempMin;
+  int? tempMax;
   String? weatherIcon;
   String? weatherCondition;
   Color? color;

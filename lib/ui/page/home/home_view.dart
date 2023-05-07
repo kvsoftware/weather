@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../base_view.dart';
 import '../../routes/app_pages.dart';
 import 'favorites/favorites_view.dart';
 import 'home_controller.dart';
 import 'map/map_view.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends BaseView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

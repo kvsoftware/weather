@@ -24,7 +24,7 @@ extension WeatherDbModelMapping on WeatherDbModel {
   }
 }
 
-extension WeatherModelMapping on WeatherApiModel {
+extension WeatherApiModelMapping on WeatherApiModel {
   WeatherEntity toWeatherEntity() {
     return WeatherEntity(
       id: id,
@@ -62,7 +62,7 @@ extension WeatherModelMapping on WeatherApiModel {
       temp: _getTemp(),
       tempMin: _getTempMin(),
       tempMax: _getTempMax(),
-      dateTime: _getDateTimeStr2(dt),
+      dateTime: _getDateTimeStr(dt),
       weatherIconPath: _getWeatherIconPath(),
       weatherCondition: _getWeatherCondition(),
     );
@@ -73,13 +73,7 @@ extension WeatherModelMapping on WeatherApiModel {
     return DateTime.fromMillisecondsSinceEpoch(dt! * 1000);
   }
 
-  _getDateTimeStr1(int? dt) {
-    if (dt == null) return null;
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
-    return DateFormat('EEE d MMMM, kk:mm').format(dateTime);
-  }
-
-  _getDateTimeStr2(int? dt) {
+  _getDateTimeStr(int? dt) {
     if (dt == null) return null;
     final dateTime = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
     final now = DateTime.now();

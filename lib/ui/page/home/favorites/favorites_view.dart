@@ -14,7 +14,7 @@ class FavoritesView extends GetViewKeepAlive<FavoritesController> {
     return Obx(
       () => Column(
         children: [
-          if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
+          if (controller.isOffline.isTrue) buildNoInternetConnectionLayout(context),
           Expanded(
             child: RefreshIndicator(
               onRefresh: controller.onRefresh,
@@ -29,15 +29,6 @@ class FavoritesView extends GetViewKeepAlive<FavoritesController> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildNoInternetConnectionLayout(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(8.0),
-      color: Colors.blueGrey,
-      child: const Text("No internet connection", textAlign: TextAlign.center),
     );
   }
 

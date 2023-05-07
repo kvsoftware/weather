@@ -15,34 +15,61 @@ class MapView extends GetViewKeepAlive<MapController> {
     return Obx(
       () => Column(
         children: [
-          if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
+          if (controller.isOffline.isTrue) buildNoInternetConnectionLayout(context),
           Expanded(
-            child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(controller.latitude, controller.longitude),
-                  zoom: controller.zoom,
-                ),
-                tileOverlays: {
-                  TileOverlay(
-                    tileOverlayId: const TileOverlayId('precipitation_new_id'),
-                    tileProvider: WeatherMapTileProvider(controller.getGetWeatherMapTileUseCase()),
-                  )
-                },
-                onCameraMove: (position) => controller.onCameraMove(position),
-                onCameraIdle: () => controller.onCameraIdle(),
-                onMapCreated: (mapController) => controller.onMapCreated(mapController)),
+            child: Stack(
+              children: [
+                _buildMap(),
+                _buildLayerButton(),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildNoInternetConnectionLayout(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(8.0),
-      color: Colors.blueGrey,
-      child: const Text("No internet connection", textAlign: TextAlign.center),
+  Widget _buildMap() {
+    return GoogleMap(
+      initialCameraPosition: CameraPosition(
+        target: LatLng(controller.latitude, controller.longitude),
+        zoom: controller.zoom,
+      ),
+      tileOverlays: {
+        TileOverlay(
+          tileOverlayId: const TileOverlayId('precipitation_new_id'),
+          tileProvider: WeatherMapTileProvider(controller.getGetWeatherMapTileUseCase()),
+        )
+      },
+      mapToolbarEnabled: false,
+      zoomControlsEnabled: false,
+      markers: Set<Marker>.of(controller.markers),
+      onCameraMove: (position) => controller.onCameraMove(position),
+      onCameraIdle: () => controller.onCameraIdle(),
+      onMapCreated: (mapController) => controller.onMapCreated(mapController),
+    );
+  }
+
+  Widget _buildLayerButton() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+          onPressed: () => _openLayerDialog(),
+          child: const Icon(Icons.layers),
+        ),
+      ),
+    );
+  }
+
+  void _openLayerDialog() {
+    Get.defaultDialog(
+      title: "Select layer",
+      content: Column(
+        children: [],
+      ),
     );
   }
 }

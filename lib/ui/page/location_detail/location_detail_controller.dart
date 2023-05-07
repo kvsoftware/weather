@@ -4,11 +4,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/entity/forecast_weather_entity.dart';
-import '../../../../domain/mapper/weather_view_model_mapper.dart';
 import '../../../../domain/use_case/favorite_location_weather_use_case.dart';
 import '../../../../domain/use_case/get_forecast_weathers_by_id_use_case.dart';
 import '../../../../domain/use_case/get_weather_by_id_use_case.dart';
 import '../../../../domain/use_case/is_favorite_weather_use_case.dart';
+import '../../mapper/weather_view_model_mapper.dart';
 import '../../view_model/weather_detail_view_model.dart';
 import 'location_detail_view.dart';
 

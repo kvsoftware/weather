@@ -3,12 +3,6 @@ import '../datasource/remote/model/location_model.dart';
 
 extension LocationModelMapping on LocationModel {
   LocationEntity toLocationEntity() {
-    return LocationEntity(
-      name: name,
-      lat: lat,
-      lon: lon,
-      country: country,
-      state: state,
-    );
+    return LocationEntity(name: name, lat: lat, lon: lon, country: country, state: state);
   }
 }

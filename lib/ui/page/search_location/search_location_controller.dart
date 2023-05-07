@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/mapper/weather_view_model_mapper.dart';
 import '../../../domain/use_case/get_weathers_by_keyword_use_case.dart';
+import '../../mapper/weather_view_model_mapper.dart';
 import '../../view_model/weather_view_model.dart';
 
 class SearchLocationController extends GetxController {

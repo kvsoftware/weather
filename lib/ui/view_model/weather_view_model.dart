@@ -3,7 +3,7 @@ import 'dart:ui';
 class WeatherViewModel {
   int? id;
   String? name;
-  double? temp;
+  int? temp;
   String? weatherIcon;
   Color? color;
 
