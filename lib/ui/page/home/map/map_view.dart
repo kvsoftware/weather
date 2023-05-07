@@ -18,14 +18,19 @@ class MapView extends GetViewKeepAlive<MapController> {
           if (controller.isOffline.isTrue) _buildNoInternetConnectionLayout(context),
           Expanded(
             child: GoogleMap(
-              initialCameraPosition: CameraPosition(target: latLng, zoom: 16),
-              tileOverlays: {
-                TileOverlay(
-                  tileOverlayId: const TileOverlayId('precipitation_new_id'),
-                  tileProvider: WeatherMapTileProvider(controller.getWeatherMapTileUseCase),
-                )
-              },
-            ),
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(controller.latitude, controller.longitude),
+                  zoom: controller.zoom,
+                ),
+                tileOverlays: {
+                  TileOverlay(
+                    tileOverlayId: const TileOverlayId('precipitation_new_id'),
+                    tileProvider: WeatherMapTileProvider(controller.getGetWeatherMapTileUseCase()),
+                  )
+                },
+                onCameraMove: (position) => controller.onCameraMove(position),
+                onCameraIdle: () => controller.onCameraIdle(),
+                onMapCreated: (mapController) => controller.onMapCreated(mapController)),
           ),
         ],
       ),
