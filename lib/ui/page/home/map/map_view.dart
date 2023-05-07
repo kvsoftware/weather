@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../base_view_keep_alive.dart';
 import 'map_controller.dart';
 import 'weather_map_tile_provider.dart';
 
-class MapView extends GetView<MapController> {
+class MapView extends GetViewKeepAlive<MapController> {
   final LatLng latLng = const LatLng(0.0, 0.0);
 
   const MapView({Key? key}) : super(key: key);

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../base_view_keep_alive.dart';
 import '../../../routes/app_pages.dart';
 import '../../../view_model/weather_view_model.dart';
 import '../../location_detail/location_detail_view.dart';
 import 'favorites_controller.dart';
 
-class FavoritesView extends GetView<FavoritesController> {
+class FavoritesView extends GetViewKeepAlive<FavoritesController> {
   const FavoritesView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

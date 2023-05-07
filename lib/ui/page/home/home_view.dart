@@ -16,12 +16,10 @@ class HomeView extends GetView<HomeController> {
         appBar: AppBar(
           title: const Text('Weather'),
           centerTitle: true,
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.favorite)),
-              Tab(icon: Icon(Icons.map)),
-            ],
-          ),
+          bottom: const TabBar(tabs: [
+            Tab(icon: Icon(Icons.favorite)),
+            Tab(icon: Icon(Icons.map)),
+          ]),
           actions: [
             IconButton(
               icon: const Icon(Icons.search, color: Colors.white),
