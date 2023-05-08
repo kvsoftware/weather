@@ -6,8 +6,7 @@ import 'search_location_controller.dart';
 class SearchLocationBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => GetWeathersByKeywordUseCase(Get.find(), Get.find()));
-    Get.lazyPut<SearchLocationController>(
-        () => SearchLocationController(Get.find()));
+    Get.lazyPut(() => GetWeathersByKeywordUseCase(Get.find(), Get.find(), Get.find()));
+    Get.lazyPut<SearchLocationController>(() => SearchLocationController(Get.find()));
   }
 }

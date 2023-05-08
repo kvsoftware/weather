@@ -5,6 +5,7 @@ class WeatherDbModel {
   @primaryKey
   final int id;
   final String name;
+  final String countryCode;
   final double lat;
   final double lon;
   final double temp;
@@ -18,6 +19,7 @@ class WeatherDbModel {
   WeatherDbModel({
     required this.id,
     required this.name,
+    required this.countryCode,
     required this.lat,
     required this.lon,
     required this.temp,

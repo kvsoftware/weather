@@ -3,6 +3,7 @@ import 'dart:ui';
 class WeatherDetailViewModel {
   int? id;
   String? name;
+  String? countryName;
   int? temp;
   int? tempMin;
   int? tempMax;
@@ -14,6 +15,7 @@ class WeatherDetailViewModel {
   WeatherDetailViewModel({
     this.id,
     this.name,
+    this.countryName,
     this.temp,
     this.tempMin,
     this.tempMax,

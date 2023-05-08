@@ -1,7 +1,7 @@
 class WeatherEntity {
   int? id;
   String? name;
-  String? country;
+  String? countryCode;
   double? lat;
   double? lon;
   double? temp;
@@ -15,7 +15,7 @@ class WeatherEntity {
   WeatherEntity({
     this.id,
     this.name,
-    this.country,
+    this.countryCode,
     this.lat,
     this.lon,
     this.temp,

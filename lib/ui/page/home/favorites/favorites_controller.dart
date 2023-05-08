@@ -30,7 +30,7 @@ class FavoritesController extends BaseController {
           (await _getFavoritedLocationsUseCase.invoke()).map((e) => e.toWeatherViewModel()).toList();
       locations(weatherViewModels);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
     isLoading(false);
   }

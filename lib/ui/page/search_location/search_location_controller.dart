@@ -54,7 +54,7 @@ class SearchLocationController extends GetxController {
           (await _getWeathersByKeywordUseCase.invoke(query)).map((e) => e.toWeatherViewModel()).toList();
       locations(weatherViewModels);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
     isLoading(false);
   }

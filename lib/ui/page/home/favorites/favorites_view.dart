@@ -55,10 +55,20 @@ class FavoritesView extends GetViewKeepAlive<FavoritesController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                weatherViewModel.name ?? '',
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 22),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    weatherViewModel.name ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 22),
+                  ),
+                  Text(
+                    weatherViewModel.countryName ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
               ),
               Row(
                 children: [

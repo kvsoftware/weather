@@ -79,7 +79,7 @@ class LocationDetailController extends GetxController {
       var response = (await _getWeatherByIdUseCase.invoke(weatherId));
       weatherDetail(response?.toWeatherDetailViewModel());
     } catch (e) {
-      print("error");
+      // Do nothing
     }
     _isLoading(isLoadingWeather: false);
   }
@@ -90,7 +90,7 @@ class LocationDetailController extends GetxController {
       var response = await _getForecastWeathersByIdUseCase.invoke(weatherId);
       forecastWeathers(response);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
     _isLoading(isLoadingForecast: false);
   }
@@ -109,7 +109,7 @@ class LocationDetailController extends GetxController {
     try {
       await _favoriteLocationWeatherUseCase.invoke(weatherId, isFavorited);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
   }
 
@@ -117,7 +117,7 @@ class LocationDetailController extends GetxController {
     try {
       isFavorited(await _isFavoriteWeatherUseCase.invoke(weatherId));
     } catch (e) {
-      print("error");
+      // Do nothing
     }
   }
 }

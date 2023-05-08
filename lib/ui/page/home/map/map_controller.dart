@@ -67,7 +67,7 @@ class MapController extends BaseController {
         ),
       );
     } catch (e) {
-      print("error");
+      // Do nothing
     }
   }
 
@@ -75,7 +75,7 @@ class MapController extends BaseController {
     try {
       await _setCameraPositionUseCase.invoke(latitude, longitude, zoom);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
   }
 
@@ -86,7 +86,7 @@ class MapController extends BaseController {
       var markers = weatherEntities.map((e) => e.toMarker()).toList();
       this.markers(markers);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
     isLoading(false);
   }
@@ -103,7 +103,7 @@ class MapController extends BaseController {
       }
       weatherMapTile(getWeatherMapTileEnumByValue(mapType));
     } catch (e) {
-      print("error");
+      // Do nothing
     }
   }
 
@@ -128,7 +128,7 @@ class MapController extends BaseController {
     try {
       await _setWeatherMapLayerUseCase.invoke(weatherMapLayer);
     } catch (e) {
-      print("error");
+      // Do nothing
     }
   }
 

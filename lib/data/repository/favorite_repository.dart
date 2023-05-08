@@ -1,7 +1,6 @@
-import '../datasource/local/model/favorite_db_model.dart';
-
 import '../../domain/entity/favorite_entity.dart';
 import '../datasource/local/favorite_local_data_source.dart';
+import '../datasource/local/model/favorite_db_model.dart';
 
 class FavoriteRepository {
   final FavoriteLocalDataSource _favoriteLocalDataSource;

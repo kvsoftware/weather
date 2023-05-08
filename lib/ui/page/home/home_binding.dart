@@ -13,7 +13,7 @@ import 'map/map_controller.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => GetFavoritedLocationsUseCase(Get.find(), Get.find()));
+    Get.lazyPut(() => GetFavoritedLocationsUseCase(Get.find(), Get.find(), Get.find()));
     Get.lazyPut(() => GetCameraPositionUseCase(Get.find()));
     Get.lazyPut(() => SetCameraPositionUseCase(Get.find()));
     Get.lazyPut(() => GetWeatherMapTileUseCase(Get.find()));

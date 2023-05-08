@@ -13,11 +13,6 @@ class WeatherRepository {
     this._weatherRemoteDataSource,
   );
 
-  Future<List<WeatherEntity>> getFavoriteWeathers() async {
-    final response = await _weatherLocalDataSource.getWeathers();
-    return response.map((e) => WeatherEntity(id: e.id, name: e.name)).toList();
-  }
-
   Future<WeatherEntity> getWeatherByCoordinate(
     String appid,
     double? lat,
@@ -50,7 +45,7 @@ class WeatherRepository {
       );
       _weatherLocalDataSource.insertWeather(weatherModel.toWeatherDbModel());
     } catch (e) {
-      // print
+      // Do nothing
     }
     final weatherDbModel = await _weatherLocalDataSource.getWeatherById(id);
     return weatherDbModel?.toWeatherEntity();

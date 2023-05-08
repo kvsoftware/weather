@@ -1,4 +1,4 @@
-import 'model/location_model.dart';
+import 'model/location_api_model.dart';
 import 'rest/geo_service.dart';
 
 class GeoRemoteDataSource {
@@ -6,8 +6,7 @@ class GeoRemoteDataSource {
 
   GeoRemoteDataSource(this._geoService);
 
-  Future<List<LocationModel>> getLocations(String appId, String q,
-      {int? limit}) {
+  Future<List<LocationApiModel>> getLocations(String appId, String q, {int? limit}) {
     return _geoService.getLocations(appId, q, limit: limit);
   }
 }
