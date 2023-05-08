@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../base_view_keep_alive.dart';
 import 'map_controller.dart';
-import 'weather_map_tile_provider.dart';
+import 'weather_map_tile_enum.dart';
 
 class MapView extends GetViewKeepAlive<MapController> {
   final LatLng latLng = const LatLng(0.0, 0.0);
@@ -35,12 +35,7 @@ class MapView extends GetViewKeepAlive<MapController> {
         target: LatLng(controller.latitude, controller.longitude),
         zoom: controller.zoom,
       ),
-      tileOverlays: {
-        TileOverlay(
-          tileOverlayId: const TileOverlayId('precipitation_new_id'),
-          tileProvider: WeatherMapTileProvider(controller.getGetWeatherMapTileUseCase()),
-        )
-      },
+      tileOverlays: controller.weatherMapLayer,
       mapToolbarEnabled: false,
       zoomControlsEnabled: false,
       markers: Set<Marker>.of(controller.markers),
@@ -67,9 +62,44 @@ class MapView extends GetViewKeepAlive<MapController> {
   void _openLayerDialog() {
     Get.defaultDialog(
       title: "Select layer",
-      content: Column(
-        children: [],
+      content: Obx(
+        () => Column(
+          children: [
+            RadioListTile<WeatherMapTileEnum>(
+              value: WeatherMapTileEnum.clouds,
+              groupValue: controller.weatherMapTile.value,
+              onChanged: (value) => controller.weatherMapTile(value),
+              title: const Text("Clouds"),
+            ),
+            RadioListTile<WeatherMapTileEnum>(
+              value: WeatherMapTileEnum.precipitation,
+              groupValue: controller.weatherMapTile.value,
+              onChanged: (value) => controller.weatherMapTile(value),
+              title: const Text("Precipitation"),
+            ),
+            RadioListTile<WeatherMapTileEnum>(
+              value: WeatherMapTileEnum.pressure,
+              groupValue: controller.weatherMapTile.value,
+              onChanged: (value) => controller.weatherMapTile(value),
+              title: const Text("Sea level pressure"),
+            ),
+            RadioListTile<WeatherMapTileEnum>(
+              value: WeatherMapTileEnum.wind,
+              groupValue: controller.weatherMapTile.value,
+              onChanged: (value) => controller.weatherMapTile(value),
+              title: const Text("Wind speed"),
+            ),
+            RadioListTile<WeatherMapTileEnum>(
+              value: WeatherMapTileEnum.temp,
+              groupValue: controller.weatherMapTile.value,
+              onChanged: (value) => controller.weatherMapTile(value),
+              title: const Text("Temperature"),
+            ),
+          ],
+        ),
       ),
+      textConfirm: "Close",
+      onConfirm: () => Get.back(),
     );
   }
 }

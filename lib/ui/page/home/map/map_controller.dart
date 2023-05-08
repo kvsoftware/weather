@@ -1,24 +1,32 @@
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../mapper/weather_view_model_mapper.dart';
 import '../../../../domain/use_case/get_camera_position_use_case.dart';
 import '../../../../domain/use_case/get_favorited_locations_use_case.dart';
+import '../../../../domain/use_case/get_weather_map_layer_use_case.dart';
 import '../../../../domain/use_case/get_weather_map_tile_use_case.dart';
 import '../../../../domain/use_case/set_camera_position_use_case.dart';
+import '../../../../domain/use_case/set_weather_map_layer_use_case.dart';
 import '../../../base_controller.dart';
+import '../../../mapper/weather_view_model_mapper.dart';
+import 'weather_map_tile_enum.dart';
+import 'weather_map_tile_provider.dart';
 
 class MapController extends BaseController {
   final GetCameraPositionUseCase _getCameraPositionUseCase;
   final SetCameraPositionUseCase _setCameraPositionUseCase;
   final GetWeatherMapTileUseCase _getWeatherMapTileUseCase;
   final GetFavoritedLocationsUseCase _getFavoritedLocationsUseCase;
+  final GetWeatherMapLayerUseCase _getWeatherMapLayerUseCase;
+  final SetWeatherMapLayerUseCase _setWeatherMapLayerUseCase;
 
   MapController(
     this._getCameraPositionUseCase,
     this._setCameraPositionUseCase,
     this._getWeatherMapTileUseCase,
     this._getFavoritedLocationsUseCase,
+    this._getWeatherMapLayerUseCase,
+    this._setWeatherMapLayerUseCase,
   );
 
   late GoogleMapController mapController;
@@ -27,8 +35,8 @@ class MapController extends BaseController {
   double zoom = 16;
 
   final markers = <Marker>[].obs;
-
-  GetWeatherMapTileUseCase getGetWeatherMapTileUseCase() => _getWeatherMapTileUseCase;
+  final weatherMapTile = Rxn<WeatherMapTileEnum>();
+  final weatherMapLayer = <TileOverlay>{}.obs;
 
   void onCameraMove(CameraPosition cameraPosition) {
     latitude = cameraPosition.target.latitude;
@@ -44,6 +52,8 @@ class MapController extends BaseController {
     this.mapController = mapController;
     _getFavoritedWeathers();
     _getCameraPosition();
+    _getWeatherMapLayer();
+    _onWeatherMapTileChanged();
   }
 
   void _getCameraPosition() async {
@@ -79,5 +89,54 @@ class MapController extends BaseController {
       print("error");
     }
     isLoading(false);
+  }
+
+  void _getWeatherMapLayer() async {
+    try {
+      final response = await _getWeatherMapLayerUseCase.invoke();
+      String mapType;
+      if (response == null) {
+        _setWeatherMapLayer(WeatherMapTileEnum.clouds.value);
+        mapType = WeatherMapTileEnum.clouds.value;
+      } else {
+        mapType = response;
+      }
+      weatherMapTile(getWeatherMapTileEnumByValue(mapType));
+    } catch (e) {
+      print("error");
+    }
+  }
+
+  void _onWeatherMapTileChanged() {
+    weatherMapTile.listen(
+      (p0) {
+        if (p0 == null) return;
+        _setWeatherMapLayer(p0.value);
+        weatherMapLayer(
+          {
+            TileOverlay(
+              tileOverlayId: TileOverlayId(p0.value),
+              tileProvider: WeatherMapTileProvider(_getWeatherMapTileUseCase, p0.value),
+            )
+          },
+        );
+      },
+    );
+  }
+
+  void _setWeatherMapLayer(String weatherMapLayer) async {
+    try {
+      await _setWeatherMapLayerUseCase.invoke(weatherMapLayer);
+    } catch (e) {
+      print("error");
+    }
+  }
+
+  WeatherMapTileEnum getWeatherMapTileEnumByValue(String value) {
+    if (value == WeatherMapTileEnum.clouds.value) return WeatherMapTileEnum.clouds;
+    if (value == WeatherMapTileEnum.precipitation.value) return WeatherMapTileEnum.precipitation;
+    if (value == WeatherMapTileEnum.pressure.value) return WeatherMapTileEnum.pressure;
+    if (value == WeatherMapTileEnum.wind.value) return WeatherMapTileEnum.wind;
+    return WeatherMapTileEnum.temp;
   }
 }

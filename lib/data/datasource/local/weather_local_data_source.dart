@@ -1,24 +1,24 @@
-import 'database/app_database.dart';
+import 'database/database_module.dart';
 import 'model/weather_db_model.dart';
 
 class WeatherLocalDataSource {
-  final AppDatabase _appDatabase;
+  final DatabaseModule _databaseModule;
 
-  WeatherLocalDataSource(this._appDatabase);
+  WeatherLocalDataSource(this._databaseModule);
 
   Future<List<WeatherDbModel>> getWeathers() {
-    return _appDatabase.weatherDao.getWeathers();
+    return _databaseModule.weatherDao.getWeathers();
   }
 
   Future<WeatherDbModel?> getWeatherById(int id) {
-    return _appDatabase.weatherDao.getWeatherById(id);
+    return _databaseModule.weatherDao.getWeatherById(id);
   }
 
   Future<void> insertWeather(WeatherDbModel weatherDbModel) {
-    return _appDatabase.weatherDao.insertWeather(weatherDbModel);
+    return _databaseModule.weatherDao.insertWeather(weatherDbModel);
   }
 
   Future<void> deleteWeather(WeatherDbModel weatherDbModel) {
-    return _appDatabase.weatherDao.deleteWeather(weatherDbModel);
+    return _databaseModule.weatherDao.deleteWeather(weatherDbModel);
   }
 }

@@ -10,7 +10,6 @@ class GetWeatherMapTileUseCase {
 
   Future<Uint8List> invoke(String mapType, int x, int y, int zoom) async {
     final apiKey = dotenv.env['OPEN_WEATHER_API_KEY'] ?? '';
-    const mapType = "temp_new";
     return _mapRepository.getWeatherMapTile(appId: apiKey, mapType: mapType, x: x, y: y, zoom: zoom);
   }
 }

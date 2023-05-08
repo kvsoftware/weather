@@ -9,11 +9,7 @@ class GetWeatherByIdUseCase {
 
   Future<WeatherEntity?> invoke(int id) async {
     final apiKey = dotenv.env['OPEN_WEATHER_API_KEY'] ?? '';
-    var weatherModel = await _weatherRepository.getWeatherById(
-      apiKey,
-      id,
-      'metric'
-    );
+    var weatherModel = await _weatherRepository.getWeatherById(apiKey, id, 'metric');
     return weatherModel;
   }
 }

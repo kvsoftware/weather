@@ -1,24 +1,24 @@
-import 'database/app_database.dart';
+import 'database/database_module.dart';
 import 'model/favorite_db_model.dart';
 
 class FavoriteLocalDataSource {
-  final AppDatabase _appDatabase;
+  final DatabaseModule _databaseModule;
 
-  FavoriteLocalDataSource(this._appDatabase);
+  FavoriteLocalDataSource(this._databaseModule);
 
   Future<List<FavoriteDbModel>> getFavorites() {
-    return _appDatabase.favoriteDao.getFavorites();
+    return _databaseModule.favoriteDao.getFavorites();
   }
 
   Future<FavoriteDbModel?> getFavoriteById(int id) {
-    return _appDatabase.favoriteDao.getFavoriteById(id);
+    return _databaseModule.favoriteDao.getFavoriteById(id);
   }
 
   Future<void> insertFavorite(FavoriteDbModel favoriteDbModel) {
-    return _appDatabase.favoriteDao.insertFavorite(favoriteDbModel);
+    return _databaseModule.favoriteDao.insertFavorite(favoriteDbModel);
   }
 
   Future<void> deleteFavorite(FavoriteDbModel favoriteDbModel) {
-    return _appDatabase.favoriteDao.deleteFavorite(favoriteDbModel);
+    return _databaseModule.favoriteDao.deleteFavorite(favoriteDbModel);
   }
 }

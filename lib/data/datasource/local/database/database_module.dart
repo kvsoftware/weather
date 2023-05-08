@@ -8,10 +8,10 @@ import '../model/weather_db_model.dart';
 import 'favorite_dao.dart';
 import 'weather_dao.dart';
 
-part 'app_database.g.dart';
+part 'database_module.g.dart';
 
 @Database(version: 1, entities: [WeatherDbModel, FavoriteDbModel])
-abstract class AppDatabase extends FloorDatabase {
+abstract class DatabaseModule extends FloorDatabase {
   WeatherDao get weatherDao;
   FavoriteDao get favoriteDao;
 }
