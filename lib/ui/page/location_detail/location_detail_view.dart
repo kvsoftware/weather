@@ -19,8 +19,6 @@ class LocationDetailView extends BaseView<LocationDetailController> {
       () => Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text(controller.weatherDetail.value?.name ?? ''),
-          centerTitle: true,
           actions: [
             IconButton(
                 icon: Icon(
@@ -65,32 +63,45 @@ class LocationDetailView extends BaseView<LocationDetailController> {
   }
 
   Widget _buildWeatherData() {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(_getDateTime(controller.weatherDetail.value?.dateTime) ?? ''),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.network(
-                controller.weatherDetail.value!.weatherIcon!,
-                height: 150,
-                fit: BoxFit.fitWidth,
-              ),
-              Text(
-                '${controller.weatherDetail.value?.temp}°',
-                style: const TextStyle(fontSize: 80),
-              ),
-            ],
-          ),
-          Text(
-            '${controller.weatherDetail.value?.tempMin}°/${controller.weatherDetail.value?.tempMax}°',
-          ),
-          const SizedBox(height: 8),
-          Text('${controller.weatherDetail.value?.weatherCondition}'),
-        ],
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "${controller.weatherDetail.value?.name}",
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "${controller.weatherDetail.value?.countryName}",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 24),
+            Text(_getDateTime(controller.weatherDetail.value?.dateTime) ?? ''),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
+                  controller.weatherDetail.value!.weatherIcon!,
+                  height: 150,
+                  fit: BoxFit.fitWidth,
+                ),
+                Text(
+                  '${controller.weatherDetail.value?.temp}°',
+                  style: const TextStyle(fontSize: 80),
+                ),
+              ],
+            ),
+            Text(
+              '${controller.weatherDetail.value?.tempMin}° / ${controller.weatherDetail.value?.tempMax}°',
+            ),
+            const SizedBox(height: 8),
+            Text('${controller.weatherDetail.value?.weatherCondition}'),
+          ],
+        ),
       ),
     );
   }

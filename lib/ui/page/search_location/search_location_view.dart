@@ -71,20 +71,22 @@ class SearchLocationView extends BaseView<SearchLocationController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    weatherViewModel.name ?? '',
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 22),
-                  ),
-                  Text(
-                    weatherViewModel.countryName ?? '',
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      weatherViewModel.name ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                    Text(
+                      weatherViewModel.countryName ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
               Row(
                 children: [
