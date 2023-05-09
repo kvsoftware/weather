@@ -10,7 +10,9 @@ abstract class GeoService {
   factory GeoService(Dio dio) = _GeoService;
 
   @GET("geo/1.0/direct")
-  Future<List<LocationApiModel>> getLocations(
-      @Query("appid") String appid, @Query('q') String q,
-      {@Query("limit") int? limit});
+  Future<List<LocationApiModel>> getLocations({
+    @Query("appid") required String apiKey,
+    @Query('q') required String q,
+    @Query("limit") int? limit,
+  });
 }

@@ -18,7 +18,7 @@ class GetWeathersByKeywordUseCase {
     String? limit,
   }) async {
     final apiKey = dotenv.env['OPEN_WEATHER_API_KEY'] ?? '';
-    final locationEntities = await _geoRepository.getLocations(apiKey, q, limit: 5);
+    final locationEntities = await _geoRepository.getLocations(apiKey: apiKey, q: q, limit: 5);
     final weatherWithCountryEntities = <WeatherWithCountryEntity>[];
 
     for (var locationEntity in locationEntities) {

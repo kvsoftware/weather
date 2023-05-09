@@ -6,7 +6,7 @@ class GeoRemoteDataSource {
 
   GeoRemoteDataSource(this._geoService);
 
-  Future<List<LocationApiModel>> getLocations(String appId, String q, {int? limit}) {
-    return _geoService.getLocations(appId, q, limit: limit);
+  Future<List<LocationApiModel>> getLocations({required String apiKey, required String q, int? limit}) {
+    return _geoService.getLocations(apiKey: apiKey, q: q, limit: limit);
   }
 }
