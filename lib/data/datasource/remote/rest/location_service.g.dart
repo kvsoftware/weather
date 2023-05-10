@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'data_service.dart';
+part of 'location_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'data_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _DataService implements DataService {
-  _DataService(
+class _LocationService implements LocationService {
+  _LocationService(
     this._dio, {
     this.baseUrl,
   });
@@ -19,76 +19,37 @@ class _DataService implements DataService {
   String? baseUrl;
 
   @override
-  Future<WeatherApiModel> getWeather(
-    appId, {
-    id,
-    lat,
-    lon,
-    units,
-    lang,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'appid': appId,
-      r'id': id,
-      r'lat': lat,
-      r'lon': lon,
-      r'units': units,
-      r'lang': lang,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<WeatherApiModel>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'data/2.5/weather',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = WeatherApiModel.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<WeathersResponse> getForecastWeathersByLatLng({
+  Future<List<LocationApiModel>> getLocations({
     required apiKey,
-    required lat,
-    required lon,
-    units,
-    lang,
+    required q,
+    limit,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'appid': apiKey,
-      r'lat': lat,
-      r'lon': lon,
-      r'units': units,
-      r'lang': lang,
+      r'q': q,
+      r'limit': limit,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<WeathersResponse>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<LocationApiModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'data/2.5/forecast',
+              'geo/1.0/direct',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = WeathersResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map(
+            (dynamic i) => LocationApiModel.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

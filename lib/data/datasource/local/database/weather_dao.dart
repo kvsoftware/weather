@@ -8,7 +8,7 @@ abstract class WeatherDao {
   Future<List<WeatherDbModel>> getWeathers();
 
   @Query('SELECT * FROM weather WHERE id = :id')
-  Future<WeatherDbModel?> getWeatherById(int id);
+  Future<WeatherDbModel?> getWeatherById(String id);
 
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertWeather(WeatherDbModel weatherDbModel);

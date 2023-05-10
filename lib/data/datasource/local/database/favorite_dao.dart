@@ -7,8 +7,8 @@ abstract class FavoriteDao {
   @Query('SELECT * FROM favorite')
   Future<List<FavoriteDbModel>> getFavorites();
 
-  @Query('SELECT * FROM favorite WHERE id = :id')
-  Future<FavoriteDbModel?> getFavoriteById(int id);
+  @Query('SELECT * FROM favorite WHERE locationId = :locationId')
+  Future<FavoriteDbModel?> getFavoriteByLocationId(String locationId);
 
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertFavorite(FavoriteDbModel favoriteDbModel);

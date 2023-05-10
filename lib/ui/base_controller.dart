@@ -17,11 +17,6 @@ abstract class BaseController extends GetxController {
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {
     subscription.cancel();
     super.onClose();

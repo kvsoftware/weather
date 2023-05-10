@@ -9,8 +9,6 @@ import '../datasource/remote/model/weather_api_model.dart';
 extension WeatherDbModelMapping on WeatherDbModel {
   WeatherEntity toWeatherEntity() {
     return WeatherEntity(
-      id: id,
-      name: name,
       lat: lat,
       lon: lon,
       temp: temp,
@@ -28,13 +26,11 @@ extension WeatherDbModelMapping on WeatherDbModel {
 extension WeatherApiModelMapping on WeatherApiModel {
   WeatherEntity toWeatherEntity() {
     return WeatherEntity(
-      id: id,
-      name: name,
-      lat: coord?.lat,
-      lon: coord?.lon,
-      temp: main?.temp,
-      tempMin: main?.tempMin,
-      tempMax: main?.tempMax,
+      lat: coord?.lat ?? 0,
+      lon: coord?.lon ?? 0,
+      temp: main?.temp ?? 0,
+      tempMin: main?.tempMin ?? 0,
+      tempMax: main?.tempMax ?? 0,
       weatherCode: _getWeatherCode(),
       weatherIcon: _getWeatherIconPath(),
       weatherCondition: _getWeatherCondition(),
@@ -43,10 +39,9 @@ extension WeatherApiModelMapping on WeatherApiModel {
     );
   }
 
-  WeatherDbModel toWeatherDbModel() {
+  WeatherDbModel toWeatherDbModel(String id) {
     return WeatherDbModel(
-      id: id ?? 0,
-      name: name ?? '',
+      id: id,
       lat: coord?.lat ?? 0,
       lon: coord?.lon ?? 0,
       temp: main?.temp ?? 0,
@@ -71,8 +66,8 @@ extension WeatherApiModelMapping on WeatherApiModel {
     );
   }
 
-  DateTime? _getDateTime() {
-    if (dt == null) return null;
+  DateTime _getDateTime() {
+    if (dt == null) DateTime.now();
     return DateTime.fromMillisecondsSinceEpoch(dt! * 1000);
   }
 

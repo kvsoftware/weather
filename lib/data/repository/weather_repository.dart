@@ -13,56 +13,56 @@ class WeatherRepository {
     this._weatherRemoteDataSource,
   );
 
-  Future<WeatherEntity> getWeatherByCoordinate(
-    String appid,
-    double? lat,
-    double? lon,
+  Future<WeatherEntity> getWeatherByLatLng({
+    required String apiKey,
+    required double lat,
+    required double lon,
     String? units,
-  ) async {
+  }) async {
     try {
-      final weatherModel = await _weatherRemoteDataSource.getWeather(
-        appid,
+      final weatherApiModel = await _weatherRemoteDataSource.getWeather(
+        apiKey,
         lat: lat,
         lon: lon,
         units: units,
       );
-      return weatherModel.toWeatherEntity();
+      final id = "${lat}_$lon";
+      _weatherLocalDataSource.insertWeather(weatherApiModel.toWeatherDbModel(id));
+      return (await _weatherLocalDataSource.getWeatherById(id))!.toWeatherEntity();
     } catch (e) {
       throw Exception('Connection failed');
     }
   }
 
-  Future<WeatherEntity?> getWeatherById(
-    String appid,
-    int id,
-    String? units,
-  ) async {
-    try {
-      final weatherModel = await _weatherRemoteDataSource.getWeather(
-        appid,
-        id: id,
-        units: units,
-      );
-      _weatherLocalDataSource.insertWeather(weatherModel.toWeatherDbModel());
-    } catch (e) {
-      // Do nothing
-    }
-    final weatherDbModel = await _weatherLocalDataSource.getWeatherById(id);
-    return weatherDbModel?.toWeatherEntity();
-  }
+  // Future<WeatherEntity?> getWeatherById(
+  //   String appid,
+  //   String id,
+  //   String? units,
+  // ) async {
+  //   try {
+  //     final weatherModel = await _weatherRemoteDataSource.getWeather(
+  //       appid,
+  //       id: id,
+  //       units: units,
+  //     );
+  //     _weatherLocalDataSource.insertWeather(weatherModel.toWeatherDbModel());
+  //   } catch (e) {
+  //     // Do nothing
+  //   }
+  //   final weatherDbModel = await _weatherLocalDataSource.getWeatherById(id);
+  //   return weatherDbModel?.toWeatherEntity();
+  // }
 
-  Future<List<WeatherApiModel>> getForecastWeathers(
-    String appid, {
-    int? id,
-    double? lat,
-    double? lon,
+  Future<List<WeatherApiModel>> getForecastWeathersByLatLng({
+    required String apiKey,
+    required double lat,
+    required double lon,
     String? units,
     String? lang,
   }) {
     try {
-      return _weatherRemoteDataSource.getForecastWeathers(
-        appid,
-        id: id,
+      return _weatherRemoteDataSource.getForecastWeathersByLatLng(
+        apiKey: apiKey,
         lat: lat,
         lon: lon,
         units: units,

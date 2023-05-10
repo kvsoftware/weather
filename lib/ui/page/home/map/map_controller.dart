@@ -30,9 +30,9 @@ class MapController extends BaseController {
   );
 
   late GoogleMapController mapController;
-  double latitude = 51.509865;
-  double longitude = -0.118092;
-  double zoom = 16;
+  double latitude = 55.024076;
+  double longitude = -2.712217;
+  double zoom = 5;
 
   final markers = <Marker>[].obs;
   final weatherMapTile = Rxn<WeatherMapTileEnum>();
@@ -61,10 +61,7 @@ class MapController extends BaseController {
       final response = await _getCameraPositionUseCase.invoke();
       if (response == null) return;
       mapController.moveCamera(
-        CameraUpdate.newLatLngZoom(
-          LatLng(response.latitude, response.longitude),
-          response.zoom,
-        ),
+        CameraUpdate.newLatLngZoom(LatLng(response.latitude, response.longitude), response.zoom),
       );
     } catch (e) {
       // Do nothing

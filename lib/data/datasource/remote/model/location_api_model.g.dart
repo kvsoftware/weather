@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'location_model.dart';
+part of 'location_api_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LocationModel _$LocationModelFromJson(Map<String, dynamic> json) =>
-    LocationModel(
+LocationApiModel _$LocationApiModelFromJson(Map<String, dynamic> json) =>
+    LocationApiModel(
       name: json['name'] as String?,
       lat: (json['lat'] as num?)?.toDouble(),
       lon: (json['lon'] as num?)?.toDouble(),
@@ -15,7 +15,7 @@ LocationModel _$LocationModelFromJson(Map<String, dynamic> json) =>
       state: json['state'] as String?,
     );
 
-Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
+Map<String, dynamic> _$LocationApiModelToJson(LocationApiModel instance) =>
     <String, dynamic>{
       'name': instance.name,
       'lat': instance.lat,

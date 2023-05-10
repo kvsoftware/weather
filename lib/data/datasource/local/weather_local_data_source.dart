@@ -10,7 +10,7 @@ class WeatherLocalDataSource {
     return _databaseModule.weatherDao.getWeathers();
   }
 
-  Future<WeatherDbModel?> getWeatherById(int id) {
+  Future<WeatherDbModel?> getWeatherById(String id) {
     return _databaseModule.weatherDao.getWeatherById(id);
   }
 

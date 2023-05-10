@@ -6,24 +6,24 @@ class FavoriteRepository {
   final FavoriteLocalDataSource _favoriteLocalDataSource;
   FavoriteRepository(this._favoriteLocalDataSource);
 
-  Future<FavoriteEntity?> getFavoriteById(int id) async {
-    final favoriteModel = await _favoriteLocalDataSource.getFavoriteById(id);
+  Future<FavoriteEntity?> getFavoriteByLocationId(String locationId) async {
+    final favoriteModel = await _favoriteLocalDataSource.getFavoriteByLocationId(locationId);
     if (favoriteModel == null) return Future.value(null);
-    return FavoriteEntity(id: favoriteModel.id);
+    return FavoriteEntity(locationId: favoriteModel.locationId);
   }
 
   Future<List<FavoriteEntity>> getFavorites() async {
     final favoriteModels = await _favoriteLocalDataSource.getFavorites();
-    return favoriteModels.map((e) => FavoriteEntity(id: e.id)).toList();
+    return favoriteModels.map((e) => FavoriteEntity(locationId: e.locationId)).toList();
   }
 
-  Future<void> setFavorite(int id) async {
-    final favoriteModel = FavoriteDbModel(id: id);
+  Future<void> setFavorite(String locationId) async {
+    final favoriteModel = FavoriteDbModel(locationId: locationId);
     await _favoriteLocalDataSource.insertFavorite(favoriteModel);
   }
 
-  Future<void> deleteFavorite(int id) async {
-    final favoriteModel = FavoriteDbModel(id: id);
+  Future<void> deleteFavorite(String locationId) async {
+    final favoriteModel = FavoriteDbModel(locationId: locationId);
     await _favoriteLocalDataSource.deleteFavorite(favoriteModel);
   }
 }

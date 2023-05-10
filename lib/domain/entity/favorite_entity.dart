@@ -1,4 +1,4 @@
 class FavoriteEntity {
-  int id;
-  FavoriteEntity({required this.id});
+  String locationId;
+  FavoriteEntity({required this.locationId});
 }

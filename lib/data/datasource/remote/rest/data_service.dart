@@ -21,11 +21,10 @@ abstract class DataService {
   });
 
   @GET("data/2.5/forecast")
-  Future<WeathersResponse> getForecastWeathers(
-    @Query("appid") String appId, {
-    @Query("id") int? id,
-    @Query("lat") double? lat,
-    @Query('lon') double? lon,
+  Future<WeathersResponse> getForecastWeathersByLatLng({
+    @Query("appid") required String apiKey,
+    @Query("lat") required double lat,
+    @Query('lon') required double lon,
     @Query("units") String? units,
     @Query("lang") String? lang,
   });

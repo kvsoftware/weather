@@ -5,7 +5,7 @@ class FavoriteLocationWeatherUseCase {
 
   FavoriteLocationWeatherUseCase(this._favoriteRepository);
 
-  Future<void> invoke(int weatherId, bool isFavorited) async {
-    return isFavorited ? _favoriteRepository.setFavorite(weatherId) : _favoriteRepository.deleteFavorite(weatherId);
+  Future<void> invoke(String locationId, bool isFavorited) async {
+    return isFavorited ? _favoriteRepository.setFavorite(locationId) : _favoriteRepository.deleteFavorite(locationId);
   }
 }

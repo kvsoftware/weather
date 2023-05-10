@@ -3,7 +3,7 @@ import 'package:floor/floor.dart';
 @Entity(tableName: 'favorite')
 class FavoriteDbModel {
   @primaryKey
-  final int id;
+  final String locationId;
 
-  FavoriteDbModel({required this.id});
+  FavoriteDbModel({required this.locationId});
 }

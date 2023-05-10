@@ -16,7 +16,7 @@ class SearchLocationController extends GetxController {
   final locations = <WeatherViewModel>[].obs;
 
   Timer? _timer;
-  final _delayInSeconds = 2;
+  final _delayInSeconds = 1;
 
   late StreamSubscription subscription;
 
@@ -26,11 +26,6 @@ class SearchLocationController extends GetxController {
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       isOffline(result == ConnectivityResult.none);
     });
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
   }
 
   @override

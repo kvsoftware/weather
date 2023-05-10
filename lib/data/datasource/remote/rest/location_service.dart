@@ -3,11 +3,11 @@ import 'package:retrofit/retrofit.dart';
 
 import '../model/location_api_model.dart';
 
-part 'geo_service.g.dart';
+part 'location_service.g.dart';
 
 @RestApi()
-abstract class GeoService {
-  factory GeoService(Dio dio) = _GeoService;
+abstract class LocationService {
+  factory LocationService(Dio dio) = _LocationService;
 
   @GET("geo/1.0/direct")
   Future<List<LocationApiModel>> getLocations({

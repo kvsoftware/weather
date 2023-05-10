@@ -4,7 +4,7 @@ class IsFavoriteWeatherUseCase {
   final FavoriteRepository _favoriteRepository;
   IsFavoriteWeatherUseCase(this._favoriteRepository);
 
-  Future<bool> invoke(int weatherId) async {
-    return await _favoriteRepository.getFavoriteById(weatherId) != null;
+  Future<bool> invoke(String locationId) async {
+    return await _favoriteRepository.getFavoriteByLocationId(locationId) != null;
   }
 }

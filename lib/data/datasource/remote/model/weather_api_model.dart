@@ -4,23 +4,13 @@ part 'weather_api_model.g.dart';
 
 @JsonSerializable()
 class WeatherApiModel {
-  int? id;
-  String? name;
   CoordinateApiModel? coord;
   MainApiModel? main;
   List<WeatherConditionApiModel>? weather;
   SysApiModel? sys;
   int? dt;
 
-  WeatherApiModel({
-    this.id,
-    this.name,
-    this.coord,
-    this.main,
-    this.weather,
-    this.sys,
-    this.dt,
-  });
+  WeatherApiModel({this.coord, this.main, this.weather, this.sys, this.dt});
 
   factory WeatherApiModel.fromJson(Map<String, dynamic> json) => _$WeatherApiModelFromJson(json);
 

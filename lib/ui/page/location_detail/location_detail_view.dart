@@ -7,8 +7,8 @@ import '../../base_view.dart';
 import 'location_detail_controller.dart';
 
 class LocationDetailArgument {
-  final int weatherId;
-  LocationDetailArgument(this.weatherId);
+  final String id;
+  LocationDetailArgument(this.id);
 }
 
 class LocationDetailView extends BaseView<LocationDetailController> {
@@ -85,7 +85,7 @@ class LocationDetailView extends BaseView<LocationDetailController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.network(
-                  controller.weatherDetail.value!.weatherIcon!,
+                  controller.weatherDetail.value!.weatherIcon,
                   height: 150,
                   fit: BoxFit.fitWidth,
                 ),

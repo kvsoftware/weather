@@ -3,8 +3,7 @@ import 'package:floor/floor.dart';
 @Entity(tableName: 'weather')
 class WeatherDbModel {
   @primaryKey
-  final int id;
-  final String name;
+  final String id;
   final String countryCode;
   final double lat;
   final double lon;
@@ -18,7 +17,6 @@ class WeatherDbModel {
 
   WeatherDbModel({
     required this.id,
-    required this.name,
     required this.countryCode,
     required this.lat,
     required this.lon,

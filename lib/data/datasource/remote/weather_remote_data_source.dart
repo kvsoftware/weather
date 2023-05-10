@@ -24,17 +24,15 @@ class WeatherRemoteDataSource {
     );
   }
 
-  Future<List<WeatherApiModel>> getForecastWeathers(
-    String appid, {
-    int? id,
-    double? lat,
-    double? lon,
+  Future<List<WeatherApiModel>> getForecastWeathersByLatLng({
+    required String apiKey,
+    required double lat,
+    required double lon,
     String? units,
     String? lang,
   }) async {
-    var response = await _dataService.getForecastWeathers(
-      appid,
-      id: id,
+    var response = await _dataService.getForecastWeathersByLatLng(
+      apiKey: apiKey,
       lat: lat,
       lon: lon,
       units: units,

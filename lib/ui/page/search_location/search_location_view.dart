@@ -64,7 +64,7 @@ class SearchLocationView extends BaseView<SearchLocationController> {
       child: InkWell(
         onTap: () => Get.toNamed(
           Routes.LOCATION_DETAIL,
-          arguments: LocationDetailArgument(weatherViewModel.id ?? 0),
+          arguments: LocationDetailArgument(weatherViewModel.id),
         ),
         child: Container(
           padding: const EdgeInsets.all(16.0),
@@ -76,12 +76,12 @@ class SearchLocationView extends BaseView<SearchLocationController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      weatherViewModel.name ?? '',
+                      weatherViewModel.name,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 22),
                     ),
                     Text(
-                      weatherViewModel.countryName ?? '',
+                      weatherViewModel.stateWithCountryName,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 16),
                     ),
@@ -90,8 +90,8 @@ class SearchLocationView extends BaseView<SearchLocationController> {
               ),
               Row(
                 children: [
-                  if (weatherViewModel.weatherIcon != null) ...[
-                    Image.network(weatherViewModel.weatherIcon!, width: 50),
+                  if (weatherViewModel.weatherIcon.isNotEmpty) ...[
+                    Image.network(weatherViewModel.weatherIcon, width: 50),
                     const SizedBox(width: 8),
                   ],
                   Text(

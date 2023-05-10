@@ -10,8 +10,8 @@ class FavoriteLocalDataSource {
     return _databaseModule.favoriteDao.getFavorites();
   }
 
-  Future<FavoriteDbModel?> getFavoriteById(int id) {
-    return _databaseModule.favoriteDao.getFavoriteById(id);
+  Future<FavoriteDbModel?> getFavoriteByLocationId(String id) {
+    return _databaseModule.favoriteDao.getFavoriteByLocationId(id);
   }
 
   Future<void> insertFavorite(FavoriteDbModel favoriteDbModel) {
