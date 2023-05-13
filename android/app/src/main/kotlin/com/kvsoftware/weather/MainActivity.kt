@@ -1,4 +1,4 @@
-package com.kvsoftware.weather.weather
+package com.kvsoftware.weather
 
 import io.flutter.embedding.android.FlutterActivity
 
