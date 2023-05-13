@@ -1,0 +1,14 @@
+{
+    "global_no_data": "No data",
+    "home_title": "Weather",
+    "map_dialog_select_layer_title": "Select layer",
+    "map_dialog_select_layer_option_clouds": "Clouds",
+    "map_dialog_select_layer_option_precipitation": "Precipitation",
+    "map_dialog_select_layer_option_sea_level_pressure": "Sea level pressure",
+    "map_dialog_select_layer_option_wind_speed": "Wind speed",
+    "map_dialog_select_layer_option_temperature": "Temperature",
+    "map_dialog_select_layer_button_close": "Close",
+    "search_title": "Search location",
+    "search_search_hint": "city name, state code, or country code",
+    "location_detail_today": "Today"
+}

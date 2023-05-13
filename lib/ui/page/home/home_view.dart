@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
 import '../../routes/app_pages.dart';
 import 'favorites/favorites_view.dart';
@@ -15,7 +16,7 @@ class HomeView extends BaseView<HomeController> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Weather'),
+          title: Text(LocaleKeys.home_title.tr),
           centerTitle: true,
           bottom: const TabBar(tabs: [
             Tab(icon: Icon(Icons.favorite)),

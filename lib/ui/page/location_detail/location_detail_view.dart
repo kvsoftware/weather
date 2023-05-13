@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../domain/entity/forecast_weather_entity.dart';
+import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
 import 'location_detail_controller.dart';
 
@@ -172,7 +173,7 @@ class LocationDetailView extends BaseView<LocationDetailController> {
     final now = DateTime.now();
 
     if (DateUtils.isSameDay(dateTime, now)) {
-      return 'Today ${DateFormat('kk:mm').format(dateTime)}';
+      return '${LocaleKeys.location_detail_today.tr} ${DateFormat('kk:mm').format(dateTime)}';
     }
     return DateFormat('EEE d MMMM, kk:mm').format(dateTime);
   }

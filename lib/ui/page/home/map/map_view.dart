@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../generated/locales.g.dart';
 import '../../../base_view_keep_alive.dart';
 import 'map_controller.dart';
 import 'weather_map_tile_enum.dart';
@@ -61,7 +62,7 @@ class MapView extends GetViewKeepAlive<MapController> {
 
   void _openLayerDialog() {
     Get.defaultDialog(
-      title: "Select layer",
+      title: LocaleKeys.map_dialog_select_layer_title.tr,
       content: Obx(
         () => Column(
           children: [
@@ -69,36 +70,36 @@ class MapView extends GetViewKeepAlive<MapController> {
               value: WeatherMapTileEnum.clouds,
               groupValue: controller.weatherMapTile.value,
               onChanged: (value) => controller.weatherMapTile(value),
-              title: const Text("Clouds"),
+              title: Text(LocaleKeys.map_dialog_select_layer_option_clouds.tr),
             ),
             RadioListTile<WeatherMapTileEnum>(
               value: WeatherMapTileEnum.precipitation,
               groupValue: controller.weatherMapTile.value,
               onChanged: (value) => controller.weatherMapTile(value),
-              title: const Text("Precipitation"),
+              title: Text(LocaleKeys.map_dialog_select_layer_option_precipitation.tr),
             ),
             RadioListTile<WeatherMapTileEnum>(
               value: WeatherMapTileEnum.pressure,
               groupValue: controller.weatherMapTile.value,
               onChanged: (value) => controller.weatherMapTile(value),
-              title: const Text("Sea level pressure"),
+              title: Text(LocaleKeys.map_dialog_select_layer_option_sea_level_pressure.tr),
             ),
             RadioListTile<WeatherMapTileEnum>(
               value: WeatherMapTileEnum.wind,
               groupValue: controller.weatherMapTile.value,
               onChanged: (value) => controller.weatherMapTile(value),
-              title: const Text("Wind speed"),
+              title: Text(LocaleKeys.map_dialog_select_layer_option_wind_speed.tr),
             ),
             RadioListTile<WeatherMapTileEnum>(
               value: WeatherMapTileEnum.temp,
               groupValue: controller.weatherMapTile.value,
               onChanged: (value) => controller.weatherMapTile(value),
-              title: const Text("Temperature"),
+              title: Text(LocaleKeys.map_dialog_select_layer_option_temperature.tr),
             ),
           ],
         ),
       ),
-      textConfirm: "Close",
+      textConfirm: LocaleKeys.map_dialog_select_layer_button_close.tr,
       onConfirm: () => Get.back(),
     );
   }

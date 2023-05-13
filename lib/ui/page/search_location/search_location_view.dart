@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
 import '../../routes/app_pages.dart';
 import '../../view_model/weather_view_model.dart';
@@ -16,7 +17,7 @@ class SearchLocationView extends BaseView<SearchLocationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search Locations'),
+        title: Text(LocaleKeys.search_title.tr),
         centerTitle: true,
       ),
       body: Obx(
@@ -29,7 +30,9 @@ class SearchLocationView extends BaseView<SearchLocationController> {
                 _buildListView(),
               ],
             ),
-            if (controller.isLoading.value) const Center(child: CircularProgressIndicator()),
+            if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator()),
+            if (controller.isLoading.isFalse && _textEditingcontroller.text.isNotEmpty && controller.locations.isEmpty)
+              Center(child: Text(LocaleKeys.global_no_data.tr)),
           ],
         ),
       ),
@@ -39,9 +42,21 @@ class SearchLocationView extends BaseView<SearchLocationController> {
   Widget _buildTitle() {
     return Container(
       padding: const EdgeInsets.all(16.0),
-      child: TextField(
-        controller: _textEditingcontroller,
-        onChanged: (value) => controller.onTextChanged(value),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: TextField(
+          controller: _textEditingcontroller,
+          onChanged: (value) => controller.onTextChanged(value),
+          decoration: InputDecoration(
+            hintText: LocaleKeys.search_search_hint.tr,
+            suffixIcon: const Icon(Icons.search),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.all(16),
+          ),
+        ),
       ),
     );
   }

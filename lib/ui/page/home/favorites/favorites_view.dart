@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../generated/locales.g.dart';
 import '../../../base_view_keep_alive.dart';
 import '../../../routes/app_pages.dart';
 import '../../../view_model/weather_view_model.dart';
@@ -21,8 +22,9 @@ class FavoritesView extends GetViewKeepAlive<FavoritesController> {
               child: Stack(
                 children: [
                   _buildListView(context),
-                  if (controller.locations.isEmpty) const Center(child: Text("Empty")),
                   if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator()),
+                  if (controller.isLoading.isFalse && controller.locations.isEmpty)
+                    Center(child: Text(LocaleKeys.global_no_data.tr)),
                 ],
               ),
             ),
