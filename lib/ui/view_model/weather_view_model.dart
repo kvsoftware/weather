@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'daily_view_model.dart';
+
 class WeatherViewModel {
   String id;
   String name;
@@ -7,6 +9,7 @@ class WeatherViewModel {
   int temp;
   String weatherIcon;
   Color color;
+  List<DailyViewModel> dailies;
 
   WeatherViewModel({
     required this.id,
@@ -15,5 +18,6 @@ class WeatherViewModel {
     required this.temp,
     required this.weatherIcon,
     required this.color,
+    required this.dailies,
   });
 }

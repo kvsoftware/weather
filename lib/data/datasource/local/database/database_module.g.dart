@@ -93,7 +93,7 @@ class _$DatabaseModule extends DatabaseModule {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `location` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `lat` REAL NOT NULL, `lon` REAL NOT NULL, `country` TEXT NOT NULL, `state` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `weather` (`id` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `lat` REAL NOT NULL, `lon` REAL NOT NULL, `temp` REAL NOT NULL, `tempMin` REAL NOT NULL, `tempMax` REAL NOT NULL, `weatherCode` INTEGER NOT NULL, `weatherIcon` TEXT NOT NULL, `weatherCondition` TEXT NOT NULL, `dt` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `weather` (`id` TEXT NOT NULL, `lat` REAL NOT NULL, `lon` REAL NOT NULL, `temp` REAL NOT NULL, `weatherCode` INTEGER NOT NULL, `weatherIcon` TEXT NOT NULL, `weatherCondition` TEXT NOT NULL, `dt` INTEGER NOT NULL, `hourly` TEXT NOT NULL, `daily` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `country` (`code` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY (`code`))');
         await database.execute(
@@ -230,16 +230,15 @@ class _$WeatherDao extends WeatherDao {
             'weather',
             (WeatherDbModel item) => <String, Object?>{
                   'id': item.id,
-                  'countryCode': item.countryCode,
                   'lat': item.lat,
                   'lon': item.lon,
                   'temp': item.temp,
-                  'tempMin': item.tempMin,
-                  'tempMax': item.tempMax,
                   'weatherCode': item.weatherCode,
                   'weatherIcon': item.weatherIcon,
                   'weatherCondition': item.weatherCondition,
-                  'dt': item.dt
+                  'dt': item.dt,
+                  'hourly': item.hourly,
+                  'daily': item.daily
                 }),
         _weatherDbModelDeletionAdapter = DeletionAdapter(
             database,
@@ -247,16 +246,15 @@ class _$WeatherDao extends WeatherDao {
             ['id'],
             (WeatherDbModel item) => <String, Object?>{
                   'id': item.id,
-                  'countryCode': item.countryCode,
                   'lat': item.lat,
                   'lon': item.lon,
                   'temp': item.temp,
-                  'tempMin': item.tempMin,
-                  'tempMax': item.tempMax,
                   'weatherCode': item.weatherCode,
                   'weatherIcon': item.weatherIcon,
                   'weatherCondition': item.weatherCondition,
-                  'dt': item.dt
+                  'dt': item.dt,
+                  'hourly': item.hourly,
+                  'daily': item.daily
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -274,16 +272,15 @@ class _$WeatherDao extends WeatherDao {
     return _queryAdapter.queryList('SELECT * FROM weather',
         mapper: (Map<String, Object?> row) => WeatherDbModel(
             id: row['id'] as String,
-            countryCode: row['countryCode'] as String,
             lat: row['lat'] as double,
             lon: row['lon'] as double,
             temp: row['temp'] as double,
-            tempMin: row['tempMin'] as double,
-            tempMax: row['tempMax'] as double,
             weatherCode: row['weatherCode'] as int,
             weatherIcon: row['weatherIcon'] as String,
             weatherCondition: row['weatherCondition'] as String,
-            dt: row['dt'] as int));
+            dt: row['dt'] as int,
+            hourly: row['hourly'] as String,
+            daily: row['daily'] as String));
   }
 
   @override
@@ -291,16 +288,15 @@ class _$WeatherDao extends WeatherDao {
     return _queryAdapter.query('SELECT * FROM weather WHERE id = ?1',
         mapper: (Map<String, Object?> row) => WeatherDbModel(
             id: row['id'] as String,
-            countryCode: row['countryCode'] as String,
             lat: row['lat'] as double,
             lon: row['lon'] as double,
             temp: row['temp'] as double,
-            tempMin: row['tempMin'] as double,
-            tempMax: row['tempMax'] as double,
             weatherCode: row['weatherCode'] as int,
             weatherIcon: row['weatherIcon'] as String,
             weatherCondition: row['weatherCondition'] as String,
-            dt: row['dt'] as int),
+            dt: row['dt'] as int,
+            hourly: row['hourly'] as String,
+            daily: row['daily'] as String),
         arguments: [id]);
   }
 

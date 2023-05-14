@@ -39,7 +39,7 @@ class GetFavoritedLocationsUseCase {
 
         CountryEntity? countryEntity;
         try {
-          countryEntity = await _countryRepository.getCountryByCode(code: weatherEntity.countryCode);
+          countryEntity = await _countryRepository.getCountryByCode(code: locationEntity.country);
         } catch (e) {
           // Do nothing
         }

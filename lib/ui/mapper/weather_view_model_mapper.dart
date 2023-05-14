@@ -5,8 +5,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../domain/entity/location_weather_country_entity.dart';
 import '../page/location_detail/location_detail_view.dart';
 import '../routes/app_pages.dart';
+import '../view_model/daily_view_model.dart';
 import '../view_model/weather_detail_view_model.dart';
 import '../view_model/weather_view_model.dart';
+import 'daily_view_model_mapper.dart';
 
 extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
   WeatherViewModel toWeatherViewModel() {
@@ -17,6 +19,7 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
       temp: weather.temp.round(),
       weatherIcon: weather.weatherIcon,
       color: _getColor(),
+      dailies: _getDailies(),
     );
   }
 
@@ -24,14 +27,13 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
     return WeatherDetailViewModel(
       id: location.getId(),
       name: location.name,
+      countryName: country?.name ?? '-',
       temp: weather.temp.round(),
-      tempMin: weather.tempMin.round(),
-      tempMax: weather.tempMax.round(),
       weatherIcon: weather.weatherIcon,
       weatherCondition: weather.weatherCondition,
+      dailies: _getDailies(),
       color: _getColor(),
       dateTime: weather.dt,
-      countryName: country?.name ?? '-',
     );
   }
 
@@ -60,5 +62,9 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
     if (weather.weatherCode == 800) return const Color(0xFFB2EBF2);
     if (weather.weatherCode >= 801 && weather.weatherCode < 810) return const Color(0xFFE0E0E0);
     return Colors.white;
+  }
+
+  List<DailyViewModel> _getDailies() {
+    return weather.daily.map((e) => e.toDailyViewModel()).toList();
   }
 }

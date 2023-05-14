@@ -1,62 +1,38 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
-import '../../../../domain/entity/forecast_weather_entity.dart';
 import '../../../../domain/use_case/favorite_location_weather_use_case.dart';
 import '../../../../domain/use_case/is_favorite_weather_use_case.dart';
-import '../../../domain/use_case/get_forecast_weathers_by_location_id_use_case.dart';
 import '../../../domain/use_case/get_weather_by_location_id_use_case.dart';
+import '../../base_controller.dart';
 import '../../mapper/weather_view_model_mapper.dart';
 import '../../view_model/weather_detail_view_model.dart';
 import 'location_detail_view.dart';
 
-class LocationDetailController extends GetxController {
+class LocationDetailController extends BaseController {
   final GetWeatherByIdUseCase _getWeatherByIdUseCase;
-  final GetForecastWeathersByLocationIdUseCase _getForecastWeathersByLocationIdUseCase;
   final FavoriteLocationWeatherUseCase _favoriteLocationWeatherUseCase;
   final IsFavoriteWeatherUseCase _isFavoriteWeatherUseCase;
 
   LocationDetailController(
     this._getWeatherByIdUseCase,
-    this._getForecastWeathersByLocationIdUseCase,
     this._favoriteLocationWeatherUseCase,
     this._isFavoriteWeatherUseCase,
   );
 
-  final isLoading = false.obs;
-  final isOffline = false.obs;
   final weatherDetail = Rxn<WeatherDetailViewModel>();
-  final forecastWeathers = <ForecastWeatherEntity>[].obs;
   final isFavorited = false.obs;
 
   bool isLoadingWeather = false;
   bool isLoadingForecast = false;
-
-  late StreamSubscription subscription;
-
-  @override
-  void onInit() {
-    super.onInit();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      isOffline(result == ConnectivityResult.none);
-    });
-  }
 
   @override
   void onReady() {
     super.onReady();
     final locationId = (Get.arguments as LocationDetailArgument).id;
     _getWeatherByLocationId(locationId);
-    _getForecastWeathersByLocationId(locationId);
     _getStatusFavorite(locationId);
-  }
-
-  @override
-  void onClose() {
-    subscription.cancel();
-    super.onClose();
   }
 
   void updateFavorite() async {
@@ -69,7 +45,6 @@ class LocationDetailController extends GetxController {
   Future<void> onRefresh() async {
     final locationId = (Get.arguments as LocationDetailArgument).id;
     _getWeatherByLocationId(locationId);
-    _getForecastWeathersByLocationId(locationId);
     _getStatusFavorite(locationId);
   }
 
@@ -82,17 +57,6 @@ class LocationDetailController extends GetxController {
       // Do nothing
     }
     _isLoading(isLoadingWeather: false);
-  }
-
-  void _getForecastWeathersByLocationId(String locationId) async {
-    _isLoading(isLoadingForecast: true);
-    try {
-      var response = await _getForecastWeathersByLocationIdUseCase.invoke(locationId);
-      forecastWeathers(response);
-    } catch (e) {
-      // Do nothing
-    }
-    _isLoading(isLoadingForecast: false);
   }
 
   void _isLoading({bool? isLoadingWeather, bool? isLoadingForecast}) {

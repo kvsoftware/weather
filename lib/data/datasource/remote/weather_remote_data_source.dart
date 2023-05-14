@@ -6,21 +6,17 @@ class WeatherRemoteDataSource {
 
   WeatherRemoteDataSource(this._dataService);
 
-  Future<WeatherApiModel> getWeather(
-    String appid, {
-    int? id,
-    double? lat,
-    double? lon,
+  Future<WeatherApiModel> getWeatherByLatLng({
+    required String apiKey,
+    required double lat,
+    required double lon,
     String? units,
-    String? lang,
   }) {
-    return _dataService.getWeather(
-      appid,
-      id: id,
+    return _dataService.getWeatherByLatLng(
+      apiKey: apiKey,
       lat: lat,
       lon: lon,
       units: units,
-      lang: lang,
     );
   }
 

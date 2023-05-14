@@ -10,8 +10,7 @@ class WeathersResponse {
 
   WeathersResponse({this.list});
 
-  factory WeathersResponse.fromJson(Map<String, dynamic> json) =>
-      _$WeathersResponseFromJson(json);
+  factory WeathersResponse.fromJson(Map<String, dynamic> json) => _$WeathersResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeathersResponseToJson(this);
 }

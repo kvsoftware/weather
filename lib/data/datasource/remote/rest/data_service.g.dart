@@ -19,22 +19,18 @@ class _DataService implements DataService {
   String? baseUrl;
 
   @override
-  Future<WeatherApiModel> getWeather(
-    appId, {
-    id,
-    lat,
-    lon,
+  Future<WeatherApiModel> getWeatherByLatLng({
+    required apiKey,
+    required lat,
+    required lon,
     units,
-    lang,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'appid': appId,
-      r'id': id,
+      r'appid': apiKey,
       r'lat': lat,
       r'lon': lon,
       r'units': units,
-      r'lang': lang,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -47,7 +43,7 @@ class _DataService implements DataService {
     )
             .compose(
               _dio.options,
-              'data/2.5/weather',
+              'data/2.5/onecall',
               queryParameters: queryParameters,
               data: _data,
             )

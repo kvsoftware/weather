@@ -4,17 +4,56 @@ part 'weather_api_model.g.dart';
 
 @JsonSerializable()
 class WeatherApiModel {
-  CoordinateApiModel? coord;
-  MainApiModel? main;
-  List<WeatherConditionApiModel>? weather;
-  SysApiModel? sys;
-  int? dt;
+  double? lat;
+  double? lon;
+  CurrentApiModel? current;
+  List<HourlyApiModel>? hourly;
+  List<DailyApiModel>? daily;
 
-  WeatherApiModel({this.coord, this.main, this.weather, this.sys, this.dt});
+  WeatherApiModel({this.lat, this.lon, this.current, this.hourly, this.daily});
 
   factory WeatherApiModel.fromJson(Map<String, dynamic> json) => _$WeatherApiModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherApiModelToJson(this);
+}
+
+@JsonSerializable()
+class CurrentApiModel {
+  int? dt;
+  double? temp;
+  List<WeatherConditionApiModel>? weather;
+
+  CurrentApiModel({this.dt, this.temp, this.weather});
+
+  factory CurrentApiModel.fromJson(Map<String, dynamic> json) => _$CurrentApiModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CurrentApiModelToJson(this);
+}
+
+@JsonSerializable()
+class HourlyApiModel {
+  int? dt;
+  double? temp;
+  List<WeatherConditionApiModel>? weather;
+
+  HourlyApiModel({this.dt, this.temp, this.weather});
+
+  factory HourlyApiModel.fromJson(Map<String, dynamic> json) => _$HourlyApiModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HourlyApiModelToJson(this);
+}
+
+@JsonSerializable()
+class DailyApiModel {
+  int? dt;
+  TempApiModel? temp;
+  List<WeatherConditionApiModel>? weather;
+
+  DailyApiModel({this.dt, this.temp, this.weather});
+
+  factory DailyApiModel.fromJson(Map<String, dynamic> json) => _$DailyApiModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DailyApiModelToJson(this);
 }
 
 @JsonSerializable()
@@ -32,43 +71,13 @@ class WeatherConditionApiModel {
 }
 
 @JsonSerializable()
-class MainApiModel {
-  double? temp;
-  @JsonKey(name: 'feels_like')
-  double? feelsLike;
-  @JsonKey(name: 'temp_min')
-  double? tempMin;
-  @JsonKey(name: 'temp_max')
-  double? tempMax;
-  int? pressure;
-  int? humidity;
+class TempApiModel {
+  double? min;
+  double? max;
 
-  MainApiModel({this.temp, this.feelsLike, this.tempMin, this.tempMax, this.pressure, this.humidity});
+  TempApiModel({this.min, this.max});
 
-  factory MainApiModel.fromJson(Map<String, dynamic> json) => _$MainApiModelFromJson(json);
+  factory TempApiModel.fromJson(Map<String, dynamic> json) => _$TempApiModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MainApiModelToJson(this);
-}
-
-@JsonSerializable()
-class CoordinateApiModel {
-  double? lat;
-  double? lon;
-
-  CoordinateApiModel({this.lat, this.lon});
-
-  factory CoordinateApiModel.fromJson(Map<String, dynamic> json) => _$CoordinateApiModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CoordinateApiModelToJson(this);
-}
-
-@JsonSerializable()
-class SysApiModel {
-  String? country;
-
-  SysApiModel({this.country});
-
-  factory SysApiModel.fromJson(Map<String, dynamic> json) => _$SysApiModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SysApiModelToJson(this);
+  Map<String, dynamic> toJson() => _$TempApiModelToJson(this);
 }

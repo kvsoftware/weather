@@ -8,29 +8,79 @@ part of 'weather_api_model.dart';
 
 WeatherApiModel _$WeatherApiModelFromJson(Map<String, dynamic> json) =>
     WeatherApiModel(
-      coord: json['coord'] == null
+      lat: (json['lat'] as num?)?.toDouble(),
+      lon: (json['lon'] as num?)?.toDouble(),
+      current: json['current'] == null
           ? null
-          : CoordinateApiModel.fromJson(json['coord'] as Map<String, dynamic>),
-      main: json['main'] == null
-          ? null
-          : MainApiModel.fromJson(json['main'] as Map<String, dynamic>),
-      weather: (json['weather'] as List<dynamic>?)
-          ?.map((e) =>
-              WeatherConditionApiModel.fromJson(e as Map<String, dynamic>))
+          : CurrentApiModel.fromJson(json['current'] as Map<String, dynamic>),
+      hourly: (json['hourly'] as List<dynamic>?)
+          ?.map((e) => HourlyApiModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      sys: json['sys'] == null
-          ? null
-          : SysApiModel.fromJson(json['sys'] as Map<String, dynamic>),
-      dt: json['dt'] as int?,
+      daily: (json['daily'] as List<dynamic>?)
+          ?.map((e) => DailyApiModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$WeatherApiModelToJson(WeatherApiModel instance) =>
     <String, dynamic>{
-      'coord': instance.coord,
-      'main': instance.main,
-      'weather': instance.weather,
-      'sys': instance.sys,
+      'lat': instance.lat,
+      'lon': instance.lon,
+      'current': instance.current,
+      'hourly': instance.hourly,
+      'daily': instance.daily,
+    };
+
+CurrentApiModel _$CurrentApiModelFromJson(Map<String, dynamic> json) =>
+    CurrentApiModel(
+      dt: json['dt'] as int?,
+      temp: (json['temp'] as num?)?.toDouble(),
+      weather: (json['weather'] as List<dynamic>?)
+          ?.map((e) =>
+              WeatherConditionApiModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CurrentApiModelToJson(CurrentApiModel instance) =>
+    <String, dynamic>{
       'dt': instance.dt,
+      'temp': instance.temp,
+      'weather': instance.weather,
+    };
+
+HourlyApiModel _$HourlyApiModelFromJson(Map<String, dynamic> json) =>
+    HourlyApiModel(
+      dt: json['dt'] as int?,
+      temp: (json['temp'] as num?)?.toDouble(),
+      weather: (json['weather'] as List<dynamic>?)
+          ?.map((e) =>
+              WeatherConditionApiModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$HourlyApiModelToJson(HourlyApiModel instance) =>
+    <String, dynamic>{
+      'dt': instance.dt,
+      'temp': instance.temp,
+      'weather': instance.weather,
+    };
+
+DailyApiModel _$DailyApiModelFromJson(Map<String, dynamic> json) =>
+    DailyApiModel(
+      dt: json['dt'] as int?,
+      temp: json['temp'] == null
+          ? null
+          : TempApiModel.fromJson(json['temp'] as Map<String, dynamic>),
+      weather: (json['weather'] as List<dynamic>?)
+          ?.map((e) =>
+              WeatherConditionApiModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$DailyApiModelToJson(DailyApiModel instance) =>
+    <String, dynamic>{
+      'dt': instance.dt,
+      'temp': instance.temp,
+      'weather': instance.weather,
     };
 
 WeatherConditionApiModel _$WeatherConditionApiModelFromJson(
@@ -51,42 +101,13 @@ Map<String, dynamic> _$WeatherConditionApiModelToJson(
       'icon': instance.icon,
     };
 
-MainApiModel _$MainApiModelFromJson(Map<String, dynamic> json) => MainApiModel(
-      temp: (json['temp'] as num?)?.toDouble(),
-      feelsLike: (json['feels_like'] as num?)?.toDouble(),
-      tempMin: (json['temp_min'] as num?)?.toDouble(),
-      tempMax: (json['temp_max'] as num?)?.toDouble(),
-      pressure: json['pressure'] as int?,
-      humidity: json['humidity'] as int?,
+TempApiModel _$TempApiModelFromJson(Map<String, dynamic> json) => TempApiModel(
+      min: (json['min'] as num?)?.toDouble(),
+      max: (json['max'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$MainApiModelToJson(MainApiModel instance) =>
+Map<String, dynamic> _$TempApiModelToJson(TempApiModel instance) =>
     <String, dynamic>{
-      'temp': instance.temp,
-      'feels_like': instance.feelsLike,
-      'temp_min': instance.tempMin,
-      'temp_max': instance.tempMax,
-      'pressure': instance.pressure,
-      'humidity': instance.humidity,
-    };
-
-CoordinateApiModel _$CoordinateApiModelFromJson(Map<String, dynamic> json) =>
-    CoordinateApiModel(
-      lat: (json['lat'] as num?)?.toDouble(),
-      lon: (json['lon'] as num?)?.toDouble(),
-    );
-
-Map<String, dynamic> _$CoordinateApiModelToJson(CoordinateApiModel instance) =>
-    <String, dynamic>{
-      'lat': instance.lat,
-      'lon': instance.lon,
-    };
-
-SysApiModel _$SysApiModelFromJson(Map<String, dynamic> json) => SysApiModel(
-      country: json['country'] as String?,
-    );
-
-Map<String, dynamic> _$SysApiModelToJson(SysApiModel instance) =>
-    <String, dynamic>{
-      'country': instance.country,
+      'min': instance.min,
+      'max': instance.max,
     };

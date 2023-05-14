@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../domain/entity/forecast_weather_entity.dart';
 import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
+import '../../image_network.dart';
+import '../../view_model/daily_view_model.dart';
 import 'location_detail_controller.dart';
 
 class LocationDetailArgument {
@@ -81,12 +82,12 @@ class LocationDetailView extends BaseView<LocationDetailController> {
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 24),
-            Text(_getDateTime(controller.weatherDetail.value?.dateTime) ?? ''),
+            Text(_getDateTimeForCurrent(controller.weatherDetail.value?.dateTime)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.network(
-                  controller.weatherDetail.value!.weatherIcon,
+                ImageNetwork(
+                  path: controller.weatherDetail.value!.weatherIcon,
                   height: 150,
                   fit: BoxFit.fitWidth,
                 ),
@@ -95,9 +96,6 @@ class LocationDetailView extends BaseView<LocationDetailController> {
                   style: const TextStyle(fontSize: 80),
                 ),
               ],
-            ),
-            Text(
-              '${controller.weatherDetail.value?.tempMin}° / ${controller.weatherDetail.value?.tempMax}°',
             ),
             const SizedBox(height: 8),
             Text('${controller.weatherDetail.value?.weatherCondition}'),
@@ -112,16 +110,14 @@ class LocationDetailView extends BaseView<LocationDetailController> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.vertical,
-      itemCount: controller.forecastWeathers.length,
+      itemCount: controller.weatherDetail.value!.dailies.length,
       itemBuilder: (context, index) => Container(
-        child: _buildForecastWeather(
-          controller.forecastWeathers[index],
-        ),
+        child: _buildForecastWeather(controller.weatherDetail.value!.dailies[index]),
       ),
     );
   }
 
-  Widget _buildForecastWeather(ForecastWeatherEntity forecastWeatherEntity) {
+  Widget _buildForecastWeather(DailyViewModel dailyViewModel) {
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Container(
@@ -133,33 +129,25 @@ class LocationDetailView extends BaseView<LocationDetailController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(forecastWeatherEntity.dateTime ?? ''),
+                  Text(_getDateTimeForDaily(dailyViewModel.dt)),
                   const SizedBox(height: 4),
                   Text(
-                    forecastWeatherEntity.weatherCondition ?? '',
+                    dailyViewModel.weatherCondition,
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
               ),
             ),
-            if (forecastWeatherEntity.weatherIconPath != null) ...[
-              Row(
-                children: [
-                  Image.network(forecastWeatherEntity.weatherIconPath!, width: 60),
-                  Text('${forecastWeatherEntity.temp.toString()}°'),
-                ],
-              )
+            if (dailyViewModel.weatherIconPath.isNotEmpty) ...[
+              ImageNetwork(path: dailyViewModel.weatherIconPath, width: 60)
             ],
             const SizedBox(width: 24),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('${forecastWeatherEntity.tempMax}°'),
+                Text('${dailyViewModel.tempMax}°'),
                 const SizedBox(height: 4),
-                Text(
-                  '${forecastWeatherEntity.tempMin}°',
-                  style: const TextStyle(color: Colors.grey),
-                ),
+                Text('${dailyViewModel.tempMin}°', style: const TextStyle(color: Colors.grey)),
               ],
             ),
           ],
@@ -168,13 +156,18 @@ class LocationDetailView extends BaseView<LocationDetailController> {
     );
   }
 
-  String? _getDateTime(DateTime? dateTime) {
-    if (dateTime == null) return null;
+  String _getDateTimeForCurrent(DateTime? dateTime) {
+    if (dateTime == null) return '';
     final now = DateTime.now();
 
     if (DateUtils.isSameDay(dateTime, now)) {
       return '${LocaleKeys.location_detail_today.tr} ${DateFormat('kk:mm').format(dateTime)}';
     }
     return DateFormat('EEE d MMMM, kk:mm').format(dateTime);
+  }
+
+  String _getDateTimeForDaily(DateTime? dateTime) {
+    if (dateTime == null) return '';
+    return DateFormat('EEE d MMMM').format(dateTime);
   }
 }

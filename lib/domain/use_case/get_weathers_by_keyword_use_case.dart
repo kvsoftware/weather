@@ -30,12 +30,10 @@ class GetWeathersByKeywordUseCase {
       );
 
       CountryEntity? countryEntity;
-      if (weatherEntity.countryCode.isNotEmpty) {
-        try {
-          countryEntity = await _countryRepository.getCountryByCode(code: weatherEntity.countryCode);
-        } catch (e) {
-          // Do nothing
-        }
+      try {
+        countryEntity = await _countryRepository.getCountryByCode(code: locationEntity.country);
+      } catch (e) {
+        // Do nothing
       }
 
       locationWeatherCountryEntities.add(

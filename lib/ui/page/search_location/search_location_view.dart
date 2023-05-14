@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
+import '../../image_network.dart';
 import '../../routes/app_pages.dart';
 import '../../view_model/weather_view_model.dart';
 import '../location_detail/location_detail_view.dart';
@@ -106,7 +107,7 @@ class SearchLocationView extends BaseView<SearchLocationController> {
               Row(
                 children: [
                   if (weatherViewModel.weatherIcon.isNotEmpty) ...[
-                    Image.network(weatherViewModel.weatherIcon, width: 50),
+                    ImageNetwork(path: weatherViewModel.weatherIcon, width: 50),
                     const SizedBox(width: 8),
                   ],
                   Text(
