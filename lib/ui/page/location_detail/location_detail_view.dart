@@ -6,6 +6,7 @@ import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
 import '../../image_network.dart';
 import '../../view_model/daily_view_model.dart';
+import '../../view_model/hourly_view_model.dart';
 import 'location_detail_controller.dart';
 
 class LocationDetailArgument {
@@ -57,7 +58,8 @@ class LocationDetailView extends BaseView<LocationDetailController> {
         child: Column(
           children: [
             _buildWeatherData(),
-            _buildForecastWeathers(),
+            _buildHourlies(),
+            _buildDailies(),
           ],
         ),
       ),
@@ -105,21 +107,56 @@ class LocationDetailView extends BaseView<LocationDetailController> {
     );
   }
 
-  Widget _buildForecastWeathers() {
+  Widget _buildHourlies() {
+    return SizedBox(
+      height: 150,
+      child: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: controller.weatherDetail.value!.dailies.length,
+        itemBuilder: (context, index) => Container(
+          child: _buildHourly(controller.weatherDetail.value!.hourlies[index]),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHourly(HourlyViewModel hourlyViewModel) {
+    return Card(
+      margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('${hourlyViewModel.temp}°'),
+            if (hourlyViewModel.weatherIconPath.isNotEmpty) ...[
+              ImageNetwork(path: hourlyViewModel.weatherIconPath, width: 60)
+            ],
+            Text(_getDateTimeForHourly(hourlyViewModel.dt)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDailies() {
     return ListView.builder(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemCount: controller.weatherDetail.value!.dailies.length,
       itemBuilder: (context, index) => Container(
-        child: _buildForecastWeather(controller.weatherDetail.value!.dailies[index]),
+        child: _buildDaily(controller.weatherDetail.value!.dailies[index]),
       ),
     );
   }
 
-  Widget _buildForecastWeather(DailyViewModel dailyViewModel) {
+  Widget _buildDaily(DailyViewModel dailyViewModel) {
     return Card(
-      margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 16),
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         child: Row(
@@ -164,6 +201,11 @@ class LocationDetailView extends BaseView<LocationDetailController> {
       return '${LocaleKeys.location_detail_today.tr} ${DateFormat('kk:mm').format(dateTime)}';
     }
     return DateFormat('EEE d MMMM, kk:mm').format(dateTime);
+  }
+
+  String _getDateTimeForHourly(DateTime? dateTime) {
+    if (dateTime == null) return '';
+    return DateFormat('kk:mm').format(dateTime);
   }
 
   String _getDateTimeForDaily(DateTime? dateTime) {

@@ -6,9 +6,11 @@ import '../../domain/entity/location_weather_country_entity.dart';
 import '../page/location_detail/location_detail_view.dart';
 import '../routes/app_pages.dart';
 import '../view_model/daily_view_model.dart';
+import '../view_model/hourly_view_model.dart';
 import '../view_model/weather_detail_view_model.dart';
 import '../view_model/weather_view_model.dart';
 import 'daily_view_model_mapper.dart';
+import 'hourly_view_model_mapper.dart';
 
 extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
   WeatherViewModel toWeatherViewModel() {
@@ -19,6 +21,7 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
       temp: weather.temp.round(),
       weatherIcon: weather.weatherIcon,
       color: _getColor(),
+      hourlies: _getHourlies(),
       dailies: _getDailies(),
     );
   }
@@ -31,6 +34,7 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
       temp: weather.temp.round(),
       weatherIcon: weather.weatherIcon,
       weatherCondition: weather.weatherCondition,
+      hourlies: _getHourlies(),
       dailies: _getDailies(),
       color: _getColor(),
       dateTime: weather.dt,
@@ -62,6 +66,10 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
     if (weather.weatherCode == 800) return const Color(0xFFB2EBF2);
     if (weather.weatherCode >= 801 && weather.weatherCode < 810) return const Color(0xFFE0E0E0);
     return Colors.white;
+  }
+
+  List<HourlyViewModel> _getHourlies() {
+    return weather.hourly.map((e) => e.toHourlyViewModel()).toList();
   }
 
   List<DailyViewModel> _getDailies() {

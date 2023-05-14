@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class DailyViewModel {
   int tempMin;
   int tempMax;

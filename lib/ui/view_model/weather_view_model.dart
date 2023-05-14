@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'daily_view_model.dart';
+import 'hourly_view_model.dart';
 
 class WeatherViewModel {
   String id;
@@ -8,8 +9,9 @@ class WeatherViewModel {
   String stateWithCountryName;
   int temp;
   String weatherIcon;
-  Color color;
+  List<HourlyViewModel> hourlies;
   List<DailyViewModel> dailies;
+  Color color;
 
   WeatherViewModel({
     required this.id,
@@ -17,7 +19,8 @@ class WeatherViewModel {
     required this.stateWithCountryName,
     required this.temp,
     required this.weatherIcon,
-    required this.color,
+    required this.hourlies,
     required this.dailies,
+    required this.color,
   });
 }

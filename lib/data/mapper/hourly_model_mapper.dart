@@ -7,7 +7,6 @@ extension HourlyApiModelMapping on HourlyApiModel {
       temp: temp?.round() ?? 0,
       weatherCode: _getWeatherCode(),
       weatherIconPath: _getWeatherIconPath(),
-      weatherCondition: _getWeatherCondition(),
       dt: _getDateTime(),
     );
   }
@@ -26,12 +25,6 @@ extension HourlyApiModelMapping on HourlyApiModel {
     if (weather == null) return '';
     if (weather!.isEmpty) return '';
     return 'https://openweathermap.org/img/wn/${weather![0].icon}@4x.png';
-  }
-
-  String _getWeatherCondition() {
-    if (weather == null) return '';
-    if (weather!.isEmpty) return '';
-    return weather![0].main ?? '';
   }
 
   DateTime _getDateTime() {
