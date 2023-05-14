@@ -30,6 +30,7 @@ extension LocationWeatherCountryEntityMapper on LocationWeatherCountryEntity {
     return WeatherDetailViewModel(
       id: location.getId(),
       name: location.name,
+      state: location.state,
       countryName: country?.name ?? '-',
       temp: weather.temp.round(),
       weatherIcon: weather.weatherIcon,

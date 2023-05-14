@@ -76,6 +76,11 @@ class LocationDetailView extends BaseView<LocationDetailController> {
           children: [
             Text(
               "${controller.weatherDetail.value?.name}",
+              style: const TextStyle(fontSize: 32),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              "${controller.weatherDetail.value?.state}",
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 4),

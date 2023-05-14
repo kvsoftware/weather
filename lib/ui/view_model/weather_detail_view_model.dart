@@ -6,6 +6,7 @@ import 'hourly_view_model.dart';
 class WeatherDetailViewModel {
   String id;
   String name;
+  String state;
   String countryName;
   int temp;
   String weatherIcon;
@@ -18,6 +19,7 @@ class WeatherDetailViewModel {
   WeatherDetailViewModel({
     required this.id,
     required this.name,
+    required this.state,
     required this.countryName,
     required this.temp,
     required this.weatherIcon,
