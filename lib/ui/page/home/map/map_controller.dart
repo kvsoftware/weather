@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../domain/manager/favorite_manager.dart';
 import '../../../../domain/use_case/get_camera_position_use_case.dart';
 import '../../../../domain/use_case/get_favorited_locations_use_case.dart';
 import '../../../../domain/use_case/get_weather_map_layer_use_case.dart';
@@ -12,7 +13,8 @@ import '../../../mapper/weather_view_model_mapper.dart';
 import 'weather_map_tile_enum.dart';
 import 'weather_map_tile_provider.dart';
 
-class MapController extends BaseController {
+class MapController extends BaseController with FavoriteListener {
+  final FavoriteManager _favoriteManager;
   final GetCameraPositionUseCase _getCameraPositionUseCase;
   final SetCameraPositionUseCase _setCameraPositionUseCase;
   final GetWeatherMapTileUseCase _getWeatherMapTileUseCase;
@@ -21,6 +23,7 @@ class MapController extends BaseController {
   final SetWeatherMapLayerUseCase _setWeatherMapLayerUseCase;
 
   MapController(
+    this._favoriteManager,
     this._getCameraPositionUseCase,
     this._setCameraPositionUseCase,
     this._getWeatherMapTileUseCase,
@@ -37,6 +40,12 @@ class MapController extends BaseController {
   final markers = <Marker>[].obs;
   final weatherMapTile = Rxn<WeatherMapTileEnum>();
   final weatherMapLayer = <TileOverlay>{}.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _favoriteManager.addListenerInMapPage(this);
+  }
 
   void onCameraMove(CameraPosition cameraPosition) {
     latitude = cameraPosition.target.latitude;
@@ -135,5 +144,10 @@ class MapController extends BaseController {
     if (value == WeatherMapTileEnum.pressure.value) return WeatherMapTileEnum.pressure;
     if (value == WeatherMapTileEnum.wind.value) return WeatherMapTileEnum.wind;
     return WeatherMapTileEnum.temp;
+  }
+
+  @override
+  void onFavoriteUpdated() {
+    _getFavoritedWeathers();
   }
 }

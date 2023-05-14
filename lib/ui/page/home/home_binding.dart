@@ -19,9 +19,17 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => GetWeatherMapTileUseCase(Get.find()));
     Get.lazyPut(() => GetWeatherMapLayerUseCase(Get.find()));
     Get.lazyPut(() => SetWeatherMapLayerUseCase(Get.find()));
-    Get.lazyPut<FavoritesController>(() => FavoritesController(Get.find()));
+    Get.lazyPut<FavoritesController>(() => FavoritesController(Get.find(), Get.find()));
     Get.lazyPut<MapController>(
-      () => MapController(Get.find(), Get.find(), Get.find(), Get.find(), Get.find(), Get.find()),
+      () => MapController(
+        Get.find(),
+        Get.find(),
+        Get.find(),
+        Get.find(),
+        Get.find(),
+        Get.find(),
+        Get.find(),
+      ),
     );
     Get.lazyPut<HomeController>(() => HomeController());
   }

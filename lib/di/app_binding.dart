@@ -22,6 +22,7 @@ import '../data/repository/location_repository.dart';
 import '../data/repository/map_preference_repository.dart';
 import '../data/repository/map_repository.dart';
 import '../data/repository/weather_repository.dart';
+import '../domain/manager/favorite_manager.dart';
 
 class AppBinding implements Bindings {
   @override
@@ -51,5 +52,6 @@ class AppBinding implements Bindings {
     Get.put(CountryLocalDataSource(Get.find()));
     Get.put(CountryRemoteDataSource(Get.find()));
     Get.put(CountryRepository(Get.find(), Get.find()));
+    Get.put(FavoriteManager());
   }
 }

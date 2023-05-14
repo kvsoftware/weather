@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../domain/use_case/favorite_location_weather_use_case.dart';
 import '../../../../domain/use_case/is_favorite_weather_use_case.dart';
+import '../../../domain/manager/favorite_manager.dart';
 import '../../../domain/use_case/get_weather_by_location_id_use_case.dart';
 import '../../base_controller.dart';
 import '../../mapper/weather_view_model_mapper.dart';
@@ -11,11 +12,13 @@ import '../../view_model/weather_detail_view_model.dart';
 import 'location_detail_view.dart';
 
 class LocationDetailController extends BaseController {
+  final FavoriteManager _favoriteManager;
   final GetWeatherByIdUseCase _getWeatherByIdUseCase;
   final FavoriteLocationWeatherUseCase _favoriteLocationWeatherUseCase;
   final IsFavoriteWeatherUseCase _isFavoriteWeatherUseCase;
 
   LocationDetailController(
+    this._favoriteManager,
     this._getWeatherByIdUseCase,
     this._favoriteLocationWeatherUseCase,
     this._isFavoriteWeatherUseCase,
@@ -40,6 +43,7 @@ class LocationDetailController extends BaseController {
     final id = weatherDetail.value!.id;
     _setFavorite(id, !isFavorited.value);
     isFavorited(!isFavorited.value);
+    _favoriteManager.onUpdateFavorite();
   }
 
   Future<void> onRefresh() async {

@@ -12,7 +12,7 @@ class LocationDetailBinding extends Bindings {
     Get.lazyPut(() => IsFavoriteWeatherUseCase(Get.find()));
     Get.lazyPut(() => FavoriteLocationWeatherUseCase(Get.find()));
     Get.lazyPut<LocationDetailController>(
-      () => LocationDetailController(Get.find(), Get.find(), Get.find()),
+      () => LocationDetailController(Get.find(), Get.find(), Get.find(), Get.find()),
     );
   }
 }

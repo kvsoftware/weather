@@ -2,16 +2,25 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
+import '../../../../domain/manager/favorite_manager.dart';
 import '../../../../domain/use_case/get_favorited_locations_use_case.dart';
 import '../../../base_controller.dart';
 import '../../../mapper/weather_view_model_mapper.dart';
 import '../../../view_model/weather_view_model.dart';
 
-class FavoritesController extends BaseController {
+class FavoritesController extends BaseController with FavoriteListener {
+  final FavoriteManager _favoriteManager;
   final GetFavoritedLocationsUseCase _getFavoritedLocationsUseCase;
-  FavoritesController(this._getFavoritedLocationsUseCase);
+
+  FavoritesController(this._favoriteManager, this._getFavoritedLocationsUseCase);
 
   final locations = <WeatherViewModel>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _favoriteManager.addListenerInFavoritePage(this);
+  }
 
   @override
   void onReady() {
@@ -33,5 +42,10 @@ class FavoritesController extends BaseController {
       // Do nothing
     }
     isLoading(false);
+  }
+
+  @override
+  void onFavoriteUpdated() {
+    _getFavoritedWeathers();
   }
 }
