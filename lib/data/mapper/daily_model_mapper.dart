@@ -7,7 +7,7 @@ extension DailyApiModelMapping on DailyApiModel {
       tempMin: temp?.min?.round() ?? 0,
       tempMax: temp?.max?.round() ?? 0,
       weatherCode: _getWeatherCode(),
-      weatherIconPath: _getWeatherIconPath(),
+      weatherIcon: _getWeatherIcon(),
       weatherCondition: _getWeatherCondition(),
       dt: _getDateTime(),
     );
@@ -19,16 +19,16 @@ extension DailyApiModelMapping on DailyApiModel {
     return weather![0].id ?? 0;
   }
 
-  String _getWeatherIconPath() {
+  String _getWeatherIcon() {
     if (weather == null) return '';
     if (weather!.isEmpty) return '';
-    return 'https://openweathermap.org/img/wn/${weather![0].icon}@4x.png';
+    return weather![0].icon ?? '';
   }
 
   String _getWeatherCondition() {
     if (weather == null) return '';
     if (weather!.isEmpty) return '';
-    return weather![0].main ?? '';
+    return weather![0].description ?? '';
   }
 
   DateTime _getDateTime() {

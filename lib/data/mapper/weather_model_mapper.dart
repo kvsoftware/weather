@@ -15,7 +15,7 @@ extension WeatherApiModelMapping on WeatherApiModel {
       lon: lon ?? 0,
       temp: current?.temp ?? 0,
       weatherCode: _getWeatherCode(),
-      weatherIcon: _getWeatherIconPath(),
+      weatherIcon: _getWeatherIcon(),
       weatherCondition: _getWeatherCondition(),
       hourly: _getHours(),
       daily: _getDailies(),
@@ -30,7 +30,7 @@ extension WeatherApiModelMapping on WeatherApiModel {
       lon: lon ?? 0,
       temp: current?.temp ?? 0,
       weatherCode: _getWeatherCode(),
-      weatherIcon: _getWeatherIconPath(),
+      weatherIcon: _getWeatherIcon(),
       weatherCondition: _getWeatherCondition(),
       dt: current?.dt ?? 0,
       hourly: jsonEncode(hourly),
@@ -44,16 +44,16 @@ extension WeatherApiModelMapping on WeatherApiModel {
     return current!.weather![0].id ?? 0;
   }
 
-  String _getWeatherIconPath() {
+  String _getWeatherIcon() {
     if (current?.weather == null) return '';
     if (current!.weather!.isEmpty) return '';
-    return 'https://openweathermap.org/img/wn/${current!.weather![0].icon}@4x.png';
+    return current!.weather![0].icon ?? '';
   }
 
   String _getWeatherCondition() {
     if (current?.weather == null) return '';
     if (current!.weather!.isEmpty) return '';
-    return current!.weather![0].main ?? '';
+    return current!.weather![0].description ?? '';
   }
 
   DateTime _getDateTime() {

@@ -24,7 +24,7 @@ class HomeView extends BaseView<HomeController> {
           ]),
           actions: [
             IconButton(
-              icon: const Icon(Icons.search, color: Colors.white),
+              icon: const Icon(Icons.search),
               onPressed: () => Get.toNamed(Routes.SEARCH_LOCATION),
             )
           ],

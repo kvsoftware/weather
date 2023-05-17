@@ -11,12 +11,15 @@ void main() async {
   await AppBinding().dependencies();
   runApp(
     GetMaterialApp(
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
       translationsKeys: AppTranslation.translations,
-      locale: const Locale('en', 'US'),
-      supportedLocales: {const Locale('en', 'US')},
-      fallbackLocale: const Locale('en', 'US'),
+      locale: _getDefaultLocale(),
+      supportedLocales: {_getDefaultLocale()},
+      fallbackLocale: _getDefaultLocale(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
   );
 }
+
+Locale _getDefaultLocale() => const Locale('en', 'US');

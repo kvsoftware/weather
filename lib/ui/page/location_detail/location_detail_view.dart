@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 
 import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
-import '../../image_network.dart';
 import '../../view_model/daily_view_model.dart';
 import '../../view_model/hourly_view_model.dart';
 import 'location_detail_controller.dart';
@@ -31,21 +30,24 @@ class LocationDetailView extends BaseView<LocationDetailController> {
                 onPressed: () => controller.updateFavorite())
           ],
         ),
-        body: Column(
-          children: [
-            if (controller.isOffline.isTrue) buildNoInternetConnectionLayout(context),
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: controller.onRefresh,
-                child: Stack(
-                  children: [
-                    if (controller.weatherDetail.value != null) _buildMainLayout(),
-                    if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator())
-                  ],
+        body: Container(
+          color: Theme.of(context).primaryColor,
+          child: Column(
+            children: [
+              if (controller.isOffline.isTrue) buildNoInternetConnectionLayout(context),
+              Expanded(
+                child: RefreshIndicator(
+                  onRefresh: controller.onRefresh,
+                  child: Stack(
+                    children: [
+                      if (controller.weatherDetail.value != null) _buildMainLayout(),
+                      if (controller.isLoading.isTrue) const Center(child: CircularProgressIndicator())
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -53,15 +55,12 @@ class LocationDetailView extends BaseView<LocationDetailController> {
 
   Widget _buildMainLayout() {
     return SingleChildScrollView(
-      child: Container(
-        color: controller.weatherDetail.value?.color,
-        child: Column(
-          children: [
-            _buildWeatherData(),
-            _buildHourlies(),
-            _buildDailies(),
-          ],
-        ),
+      child: Column(
+        children: [
+          _buildWeatherData(),
+          _buildHourlies(),
+          _buildDailies(),
+        ],
       ),
     );
   }
@@ -93,8 +92,8 @@ class LocationDetailView extends BaseView<LocationDetailController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ImageNetwork(
-                  path: controller.weatherDetail.value!.weatherIcon,
+                Image.asset(
+                  controller.weatherDetail.value!.weatherIcon,
                   height: 150,
                   fit: BoxFit.fitWidth,
                 ),
@@ -137,7 +136,7 @@ class LocationDetailView extends BaseView<LocationDetailController> {
           children: [
             Text('${hourlyViewModel.temp}°'),
             if (hourlyViewModel.weatherIconPath.isNotEmpty) ...[
-              ImageNetwork(path: hourlyViewModel.weatherIconPath, width: 60)
+              Image.asset(hourlyViewModel.weatherIconPath, width: 60)
             ],
             Text(_getDateTimeForHourly(hourlyViewModel.dt)),
           ],
@@ -180,9 +179,7 @@ class LocationDetailView extends BaseView<LocationDetailController> {
                 ],
               ),
             ),
-            if (dailyViewModel.weatherIconPath.isNotEmpty) ...[
-              ImageNetwork(path: dailyViewModel.weatherIconPath, width: 60)
-            ],
+            if (dailyViewModel.weatherIconPath.isNotEmpty) ...[Image.asset(dailyViewModel.weatherIconPath, width: 60)],
             const SizedBox(width: 24),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,

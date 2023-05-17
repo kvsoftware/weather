@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../generated/locales.g.dart';
 import '../../base_view.dart';
-import '../../image_network.dart';
 import '../../routes/app_pages.dart';
 import '../../view_model/weather_view_model.dart';
 import '../location_detail/location_detail_view.dart';
@@ -75,7 +74,6 @@ class SearchLocationView extends BaseView<SearchLocationController> {
 
   Widget _buildItem(WeatherViewModel weatherViewModel) {
     return Card(
-      color: weatherViewModel.color,
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: InkWell(
         onTap: () => Get.toNamed(
@@ -107,7 +105,7 @@ class SearchLocationView extends BaseView<SearchLocationController> {
               Row(
                 children: [
                   if (weatherViewModel.weatherIcon.isNotEmpty) ...[
-                    ImageNetwork(path: weatherViewModel.weatherIcon, width: 50),
+                    Image.asset(weatherViewModel.weatherIcon, width: 50),
                     const SizedBox(width: 8),
                   ],
                   Text(

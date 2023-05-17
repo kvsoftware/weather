@@ -1,13 +1,13 @@
 class HourlyEntity {
   int temp;
   int weatherCode;
-  String weatherIconPath;
+  String weatherIcon;
   DateTime dt;
 
   HourlyEntity({
     required this.temp,
     required this.weatherCode,
-    required this.weatherIconPath,
+    required this.weatherIcon,
     required this.dt,
   });
 }

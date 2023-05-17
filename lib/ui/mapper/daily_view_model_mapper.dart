@@ -1,5 +1,6 @@
 import '../../domain/entity/daily_entity.dart';
 import '../view_model/daily_view_model.dart';
+import 'icon_mapper.dart';
 
 extension DailyEntityMapper on DailyEntity {
   DailyViewModel toDailyViewModel() {
@@ -7,7 +8,7 @@ extension DailyEntityMapper on DailyEntity {
       tempMin: tempMin,
       tempMax: tempMax,
       weatherCode: weatherCode,
-      weatherIconPath: weatherIconPath,
+      weatherIconPath: getIcon(weatherIcon),
       weatherCondition: weatherCondition,
       dt: dt,
     );

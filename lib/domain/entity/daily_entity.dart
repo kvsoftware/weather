@@ -2,7 +2,7 @@ class DailyEntity {
   int tempMin;
   int tempMax;
   int weatherCode;
-  String weatherIconPath;
+  String weatherIcon;
   String weatherCondition;
   DateTime dt;
 
@@ -10,7 +10,7 @@ class DailyEntity {
     required this.tempMin,
     required this.tempMax,
     required this.weatherCode,
-    required this.weatherIconPath,
+    required this.weatherIcon,
     required this.weatherCondition,
     required this.dt,
   });

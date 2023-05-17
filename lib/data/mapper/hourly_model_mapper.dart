@@ -6,7 +6,7 @@ extension HourlyApiModelMapping on HourlyApiModel {
     return HourlyEntity(
       temp: temp?.round() ?? 0,
       weatherCode: _getWeatherCode(),
-      weatherIconPath: _getWeatherIconPath(),
+      weatherIcon: _getWeatherIcon(),
       dt: _getDateTime(),
     );
   }
@@ -21,10 +21,10 @@ extension HourlyApiModelMapping on HourlyApiModel {
     return weather![0].id ?? 0;
   }
 
-  String _getWeatherIconPath() {
+  String _getWeatherIcon() {
     if (weather == null) return '';
     if (weather!.isEmpty) return '';
-    return 'https://openweathermap.org/img/wn/${weather![0].icon}@4x.png';
+    return weather![0].icon ?? '';
   }
 
   DateTime _getDateTime() {
