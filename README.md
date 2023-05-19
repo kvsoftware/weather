@@ -2,13 +2,13 @@
 Welcome to the my Weather application developed using Flutter.
 
 ## Introduction
-The Weather application provides real-time weather information for desired locations, including hourly and 7-day forecasts. Users are able to save their favorite locations. Additionally, it includes a weather map for visualization.
+The Weather application offers real-time weather information for desired locations, including detailed hourly and 7-day forecasts. Users have the capability to save their favorite locations for quick access. Additionally, the application provides a weather map feature for enhanced visualization of weather patterns. The data source for this application is provided by [OpenWeatherMap](https://openweathermap.org/), a trusted platform for weather data.
 
 ## Feature
 - Browse weather information from around the world.
 - Choose your preferred location criteria to receive targeted weather information.
 - Save your favorite locations to view weather information.
-- Explore the weather map.
+- Explore the weather map for visualizing weather patterns.
 
 ## Installation
 To get started with the Weather mobile application, follow these steps:
@@ -31,3 +31,5 @@ sh build.sh
 ```
 flutter run
 ```
+
+Feel free to explore the Weather application and enjoy the real-time weather updates!
