@@ -19,7 +19,7 @@ git clone https://github.com/kvsoftware/weather
 
 2. Navigate to the project directory:
 ```
-weather
+cd weather
 ```
 
 3. Install the necessary dependencies, generate the needed files, wait for success, and leave it as it is:
