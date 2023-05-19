@@ -1,16 +1,33 @@
-# weather
+# Weather
+Welcome to the my Weather application developed using Flutter.
 
-A new Flutter project.
+## Introduction
+The Weather application provides real-time weather information for desired locations, including hourly and 7-day forecasts. Users are able to save their favorite locations. Additionally, it includes a weather map for visualization.
 
-## Getting Started
+## Feature
+- Browse weather information from around the world.
+- Choose your preferred location criteria to receive targeted weather information.
+- Save your favorite locations to view weather information.
+- Explore the weather map.
 
-This project is a starting point for a Flutter application.
+## Installation
+To get started with the Weather mobile application, follow these steps:
+1. Clone the repository to your local machine:
+```
+git clone https://github.com/kvsoftware/weather
+```
 
-A few resources to get you started if this is your first Flutter project:
+2. Navigate to the project directory:
+```
+weather
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. Install the necessary dependencies, generate the needed files, wait for success, and leave it as it is:
+```
+sh build.sh
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+4. Open a new terminal, connect your mobile device or emulator, and run the application.
+```
+flutter run
+```
