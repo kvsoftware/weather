@@ -1,4 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import '../../data/repository/country_repository.dart';
 import '../../data/repository/location_repository.dart';
@@ -16,7 +16,7 @@ class GetWeatherByIdUseCase {
     final locationEntity = await _locationRepository.getLocationById(id: locationId);
     if (locationEntity == null) return null;
 
-    final apiKey = dotenv.env['OPEN_WEATHER_API_KEY'] ?? '';
+    final apiKey = FlutterConfig.get('OPEN_WEATHER_API_KEY');
     final weatherEntity = await _weatherRepository.getWeatherByLatLng(
       apiKey: apiKey,
       lat: locationEntity.lat,

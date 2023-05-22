@@ -1,4 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import '../../data/repository/country_repository.dart';
 import '../../data/repository/favorite_repository.dart';
@@ -24,7 +24,7 @@ class GetFavoritedLocationsUseCase {
     final favoriteEntites = await _favoriteRepository.getFavorites();
     if (favoriteEntites.isEmpty) return [];
 
-    final apiKey = dotenv.env['OPEN_WEATHER_API_KEY'] ?? '';
+    final apiKey = FlutterConfig.get('OPEN_WEATHER_API_KEY');
     final locationWeatherCountryEntities = <LocationWeatherCountryEntity>[];
 
     for (var favoriteEntity in favoriteEntites) {

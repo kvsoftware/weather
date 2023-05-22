@@ -1,4 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import '../../data/repository/country_repository.dart';
 import '../../data/repository/location_repository.dart';
@@ -17,7 +17,7 @@ class GetWeathersByKeywordUseCase {
     String q, {
     String? limit,
   }) async {
-    final apiKey = dotenv.env['OPEN_WEATHER_API_KEY'] ?? '';
+    final apiKey = FlutterConfig.get('OPEN_WEATHER_API_KEY');
     final locationEntities = await _locationRepository.getLocations(apiKey: apiKey, q: q, limit: 5);
     final locationWeatherCountryEntities = <LocationWeatherCountryEntity>[];
 

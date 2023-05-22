@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:get/get.dart';
 
 import 'di/app_binding.dart';
@@ -7,7 +7,8 @@ import 'generated/locales.g.dart';
 import 'ui/routes/app_pages.dart';
 
 void main() async {
-  await dotenv.load(fileName: 'config.env');
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterConfig.loadEnvVariables();
   await AppBinding().dependencies();
   runApp(
     GetMaterialApp(
