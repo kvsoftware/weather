@@ -43,6 +43,7 @@ class MapView extends GetViewKeepAlive<MapController> {
       onCameraMove: (position) => controller.onCameraMove(position),
       onCameraIdle: () => controller.onCameraIdle(),
       onMapCreated: (mapController) => controller.onMapCreated(mapController),
+      myLocationButtonEnabled: false,
     );
   }
 
