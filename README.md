@@ -22,12 +22,19 @@ git clone https://github.com/kvsoftware/weather
 cd weather
 ```
 
-3. Install the necessary dependencies, generate the needed files, wait for success, and leave it as it is:
+3. Configure the API keys in the .env file:
+```
+OPEN_WEATHER_API_KEY={ Put your OpenWeather API key }
+GOOGLE_MAPS_API_KEY_ANDROID={ Put your Google Map API key for Android }
+GOOGLE_MAPS_API_KEY_IOS={ Put your Google Map API key for iOS }
+```
+
+4. Install the necessary dependencies, generate the needed files, wait for success, and leave it as it is:
 ```
 sh build.sh
 ```
 
-4. Open a new terminal, connect your mobile device or emulator, and run the application.
+5. Open a new terminal, connect your mobile device or emulator, and run the application.
 ```
 flutter run
 ```
