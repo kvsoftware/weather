@@ -1,6 +1,8 @@
 import 'package:floor/floor.dart';
 
-@Entity(tableName: 'location')
+import '../database/database_module.dart';
+
+@Entity(tableName: locationTable)
 class LocationDbModel {
   @primaryKey
   final String id;

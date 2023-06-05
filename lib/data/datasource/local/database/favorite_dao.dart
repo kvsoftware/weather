@@ -1,13 +1,16 @@
 import 'package:floor/floor.dart';
 
 import '../model/favorite_db_model.dart';
+import 'database_module.dart';
+
+const String columnLocationId = 'locationId';
 
 @dao
 abstract class FavoriteDao {
-  @Query('SELECT * FROM favorite')
+  @Query('SELECT * FROM $favoriteTable')
   Future<List<FavoriteDbModel>> getFavorites();
 
-  @Query('SELECT * FROM favorite WHERE locationId = :locationId')
+  @Query('SELECT * FROM $favoriteTable WHERE $columnLocationId = :locationId')
   Future<FavoriteDbModel?> getFavoriteByLocationId(String locationId);
 
   @Insert(onConflict: OnConflictStrategy.replace)

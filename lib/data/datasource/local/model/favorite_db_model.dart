@@ -1,6 +1,8 @@
 import 'package:floor/floor.dart';
 
-@Entity(tableName: 'favorite')
+import '../database/database_module.dart';
+
+@Entity(tableName: favoriteTable)
 class FavoriteDbModel {
   @primaryKey
   final String locationId;

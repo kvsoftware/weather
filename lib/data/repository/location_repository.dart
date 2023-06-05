@@ -27,7 +27,8 @@ class LocationRepository {
       final locationModel = await _locationLocalDataSource.getLocationById(id);
       return locationModel?.toLocationEntity();
     } catch (e) {
-      throw Exception('Connection failed');
+      // Do nothing
     }
+    return null;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../generated/locales.g.dart';
+
 abstract class GetViewKeepAlive<T> extends StatefulWidget {
   const GetViewKeepAlive({super.key, this.tag});
 
@@ -21,7 +23,7 @@ abstract class GetViewKeepAlive<T> extends StatefulWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(8.0),
       color: Colors.blueGrey,
-      child: const Text("No internet connection", textAlign: TextAlign.center),
+      child: Text(LocaleKeys.global_no_internet_connection.tr, textAlign: TextAlign.center),
     );
   }
 }

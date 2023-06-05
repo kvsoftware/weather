@@ -1,5 +1,6 @@
 import 'package:flutter_config/flutter_config.dart';
 
+import '../../core/constant.dart';
 import '../../data/repository/country_repository.dart';
 import '../../data/repository/location_repository.dart';
 import '../../data/repository/weather_repository.dart';
@@ -21,7 +22,7 @@ class GetWeatherByIdUseCase {
       apiKey: apiKey,
       lat: locationEntity.lat,
       lon: locationEntity.lon,
-      units: 'metric',
+      units: metricUnits,
     );
 
     CountryEntity? countryEntity;

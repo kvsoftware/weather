@@ -1,5 +1,6 @@
 {
     "global_no_data": "No data",
+    "global_no_internet_connection": "No internet connection",
     "home_title": "Weather",
     "map_dialog_select_layer_title": "Select layer",
     "map_dialog_select_layer_option_clouds": "Clouds",

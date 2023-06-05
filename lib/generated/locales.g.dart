@@ -11,6 +11,7 @@ class AppTranslation {
 class LocaleKeys {
   LocaleKeys._();
   static const global_no_data = 'global_no_data';
+  static const global_no_internet_connection = 'global_no_internet_connection';
   static const home_title = 'home_title';
   static const map_dialog_select_layer_title = 'map_dialog_select_layer_title';
   static const map_dialog_select_layer_option_clouds =
@@ -33,6 +34,7 @@ class LocaleKeys {
 class Locales {
   static const en = {
     'global_no_data': 'No data',
+    'global_no_internet_connection': 'No internet connection',
     'home_title': 'Weather',
     'map_dialog_select_layer_title': 'Select layer',
     'map_dialog_select_layer_option_clouds': 'Clouds',

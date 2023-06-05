@@ -14,6 +14,11 @@ import 'weather_dao.dart';
 
 part 'database_module.g.dart';
 
+const String countryTable = 'country';
+const String favoriteTable = 'favorite';
+const String locationTable = 'location';
+const String weatherTable = 'weather';
+
 @Database(version: 1, entities: [LocationDbModel, WeatherDbModel, CountryDbModel, FavoriteDbModel])
 abstract class DatabaseModule extends FloorDatabase {
   LocationDao get locationDao;

@@ -1,6 +1,8 @@
 import 'package:floor/floor.dart';
 
-@Entity(tableName: 'country')
+import '../database/database_module.dart';
+
+@Entity(tableName: countryTable)
 class CountryDbModel {
   @primaryKey
   final String code;

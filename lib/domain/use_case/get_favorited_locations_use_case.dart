@@ -1,5 +1,6 @@
 import 'package:flutter_config/flutter_config.dart';
 
+import '../../core/constant.dart';
 import '../../data/repository/country_repository.dart';
 import '../../data/repository/favorite_repository.dart';
 import '../../data/repository/location_repository.dart';
@@ -34,7 +35,7 @@ class GetFavoritedLocationsUseCase {
           apiKey: apiKey,
           lat: locationEntity.lat,
           lon: locationEntity.lon,
-          units: 'metric',
+          units: metricUnits,
         );
 
         CountryEntity? countryEntity;

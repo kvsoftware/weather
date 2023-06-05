@@ -1,16 +1,22 @@
 import 'package:floor/floor.dart';
 
 import '../model/location_db_model.dart';
+import 'database_module.dart';
+
+const String columnId = 'id';
+const String columnName = 'name';
+const String columnLatitude = 'latitude';
+const String columnLongitude = 'longitude';
 
 @dao
 abstract class LocationDao {
-  @Query('SELECT * FROM location WHERE id = :id')
+  @Query('SELECT * FROM $locationTable WHERE $columnId = :id')
   Future<LocationDbModel?> getLocationById(String id);
 
-  @Query('SELECT * FROM location WHERE latitude = :latitude AND longitude = :longitude')
+  @Query('SELECT * FROM $locationTable WHERE $columnLatitude = :latitude AND $columnLongitude = :longitude')
   Future<LocationDbModel?> getLocationByLatLng(double latitude, double longitude);
 
-  @Query('SELECT * FROM location WHERE name LIKE :name')
+  @Query('SELECT * FROM $locationTable WHERE $columnName LIKE :name')
   Future<List<LocationDbModel>> getLocationsByName(String name);
 
   @Insert(onConflict: OnConflictStrategy.replace)

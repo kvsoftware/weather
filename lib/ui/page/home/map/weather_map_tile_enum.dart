@@ -6,19 +6,25 @@ enum WeatherMapTileEnum {
   temp,
 }
 
+const String cloudsMapTile = "clouds_new";
+const String precipitationMapTile = "precipitation_new";
+const String pressureMapTile = "pressure_new";
+const String windMapTile = "wind_new";
+const String tempMapTile = "temp_new";
+
 extension WeatherMapTileExtension on WeatherMapTileEnum {
   String get value {
     switch (this) {
       case WeatherMapTileEnum.clouds:
-        return 'clouds_new';
+        return cloudsMapTile;
       case WeatherMapTileEnum.precipitation:
-        return 'precipitation_new';
+        return precipitationMapTile;
       case WeatherMapTileEnum.pressure:
-        return 'pressure_new';
+        return pressureMapTile;
       case WeatherMapTileEnum.wind:
-        return 'wind_new';
+        return windMapTile;
       case WeatherMapTileEnum.temp:
-        return 'temp_new';
+        return tempMapTile;
     }
   }
 }

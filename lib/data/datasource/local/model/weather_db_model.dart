@@ -1,6 +1,8 @@
 import 'package:floor/floor.dart';
 
-@Entity(tableName: 'weather')
+import '../database/database_module.dart';
+
+@Entity(tableName: weatherTable)
 class WeatherDbModel {
   @primaryKey
   final String id;

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../core/constant.dart';
 import '../data/datasource/local/country_local_data_source.dart';
 import '../data/datasource/local/database/database_module.dart';
 import '../data/datasource/local/favorite_local_data_source.dart';
@@ -28,10 +29,10 @@ class AppBinding implements Bindings {
   @override
   Future<void> dependencies() async {
     await Get.putAsync(
-      () => $FloorDatabaseModule.databaseBuilder('app_database.db').build(),
+      () => $FloorDatabaseModule.databaseBuilder(databaseName).build(),
       permanent: true,
     );
-    Get.put(getDio('https://api.openweathermap.org/'));
+    Get.put(getDio(baseUrl));
     Get.put(SharedPrefModule());
     Get.put(LocationService(Get.find()));
     Get.put(DataService(Get.find()));
